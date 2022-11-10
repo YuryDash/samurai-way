@@ -2,7 +2,11 @@
     grid-area: n;
     background-color: #ceb6b6;
     border-radius: 10px;
+    padding: 50px;
 }
 .item a{
     color: #015c90;
+}
+.item {
+    margin-bottom: 15px;
 }

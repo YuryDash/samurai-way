@@ -1,0 +1,23 @@
+.profile {
+    grid-area: p;
+    background-color: #d8e3c2;
+    border-radius: 10px;
+padding: 50px;
+}
+
+.my__data {
+    display: flex;
+}
+
+.avatar {
+    overflow: hidden;
+width: 250px;
+    height: 250px;
+    border-radius: 50%;
+}
+
+.avatar img {
+
+    width: 250px;
+
+}

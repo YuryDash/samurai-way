@@ -1,0 +1,14 @@
+.posts {
+    display: flex;
+    align-items: center
+}
+
+.avatar img {
+    max-width: 60px;
+    border-radius: 30px;
+}
+
+.text {
+    font-size: 18px;
+    margin-left: 40px;
+}
