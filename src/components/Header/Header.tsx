@@ -7,6 +7,7 @@ export const Header = () => {
         <>
         <header className={s.header}>
             <img src={avatar} alt="just logo"/>
+            <div>Pride of sins </div>
         </header>
         </>
     );

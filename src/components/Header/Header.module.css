@@ -1,9 +1,26 @@
 .header {
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&display=swap');
     grid-area: h;
     background-color: #020000;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+
+    color: gold;
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: 10px;
+    font-family: 'Cinzel', serif;
 }
 .header img {
     max-width: 56px;
+}
+
+.header div:hover {
+    color: red;
+    transition-duration: 1000ms;
 }

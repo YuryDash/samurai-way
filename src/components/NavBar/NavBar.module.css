@@ -6,6 +6,9 @@
 }
 .item a{
     color: #015c90;
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 18px;
 }
 .item {
     margin-bottom: 15px;
