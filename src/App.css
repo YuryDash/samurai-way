@@ -15,4 +15,13 @@ body{
                         "n p";
 }
 
+.app-wrapper-content{
+
+    grid-area: p;
+    background-color: #d8e3c2;
+    border-radius: 10px;
+    padding: 50px;
+
+
+}
 
