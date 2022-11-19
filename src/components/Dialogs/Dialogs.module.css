@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&display=swap');
+
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    font-size: 20px;
+}
+
+.dialogsItems {
+}
+
+.dialogsItems .active {
+    color: black;
+    text-shadow: 0px 0px 3px gold;
+    text-decoration: underline;
+}
+
+.dialog {
+    padding: 15px 0;
+    font-weight: 500;
+
+}
+
+.messages {
+}
+
+.message {
+    padding: 15px 0;
+    font-weight: 400;
+
+}

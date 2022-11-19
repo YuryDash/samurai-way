@@ -1,5 +1,5 @@
 body{
-    background-color: #2c2b2b;
+    background-color: rgb(70, 70, 70);
 }
 .app-wrapper {
     max-width: 1450px;
@@ -18,7 +18,7 @@ body{
 .app-wrapper-content{
 
     grid-area: p;
-    background-color: #d8e3c2;
+    background-color: #568fa2;
     border-radius: 10px;
     padding: 50px;
 

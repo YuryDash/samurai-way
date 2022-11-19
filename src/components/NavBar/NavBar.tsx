@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./NavBar.module.css"
 import {NavLink} from "react-router-dom";
+//задал переменую класса актив
 let active = s.active;
 export const NavBar = () => {
     return (

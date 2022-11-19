@@ -29,11 +29,11 @@ export const Profile = () => {
                         alt="Just Avatar"/>
                 </div>
 
-                <div>
+                <div className={s.info}>
                     <div>
                         Yury Dashukevich
                     </div>
-                    <div>
+                    <div >
                         <div>Date of birth: <span> 12.06</span></div>
                         <div>City: <span> Minsk</span></div>
                         <div>Education: <span> Auto Mechanical College</span></div>
