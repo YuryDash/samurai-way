@@ -17,11 +17,6 @@ import {Posts} from "./MyPosts/Posts/Posts";
 export const Profile = () => {
     return (
         <div>
-            <div>
-
-            </div>
-
-
             <div className={s.my__data}>
                 <div className={s.avatar}>
                     <img
@@ -42,14 +37,13 @@ export const Profile = () => {
                 </div>
             </div>
 
-
             <div>
                 <MyPosts/>
-
             </div>
             <div>
                 <Posts message={'Hello my friends'}/>
                 <Posts message={'First post'}/>
+                <Posts message={"dsfsdfsdf"}/>
 
             </div>
         </div>

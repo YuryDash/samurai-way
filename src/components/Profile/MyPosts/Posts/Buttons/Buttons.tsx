@@ -1,21 +1,26 @@
 import React from "react";
+import s from "./Buttons.module.css"
 
-type PropsButtons = {
-    count: number
+
+
+
+export type PropsButtons = {
+    likes?: number
+    disLikes?:number
+    onClick:()=>void
 }
 
 export const ButtonsLike = (props: PropsButtons) => {
     return (
         <span>
-            <button>LIKE{props.count}</button>
+            <button onClick={props.onClick}  className={s.buttonLike}>LIKE: <span className={s.likeNum}>{props.likes}</span></button>
         </span>
     )
-
 }
 export const ButtonsDislike = (props: PropsButtons) => {
     return (
         <span>
-            <button>DISLIKE{props.count}</button>
+            <button onClick={props.onClick} className={s.buttonDis}>DISLIKE: <span className={s.disLikeNum}>{props.disLikes}</span></button>
         </span>
     )
 
