@@ -6,7 +6,7 @@ export const MyPosts = () => {
         <div className={s.my__post}>
             <div>NEW POST</div>
             <div className={s.newPost}>
-                <textarea placeholder={'New Posts'} id="1"> </textarea>
+                <textarea  placeholder={'New Posts'} id="1"> </textarea>
                 <button>Send Posts</button>
             </div>
         </div>
