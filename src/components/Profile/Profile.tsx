@@ -1,20 +1,29 @@
-import React from "react";
+import React, {useState} from "react";
 import s from "./Profile.module.css"
 import {MyPosts} from "./MyPosts/MyPosts";
 import {Posts} from "./MyPosts/Posts/Posts";
+import {v1} from "uuid";
 
-
-// const Arr = [
-//     {id: 1, name:'My Friend: ', message: "Hello my friend, how a u?",},
-//     {id: 2, name:'My Friends: ', message: "Helloo my friend, how a u?",},
-//     {id: 3, name:'My Friendd: ', message: "Hellooo my friend, how a u?",},
-// ]
-// const Arr2 = [
-//     {id: 2, name:'My Name: ', message: "Hello, i'am fine and u?",}
-// ]
 
 
 export const Profile = () => {
+
+    let postsData = [
+        {id: v1(), text: 'hi how are u?'},
+        {id: v1(), text: 'u?'},
+    ]
+    let [post, setPost] = useState(postsData)
+
+
+    const makePosts = (text: string) => {
+        let makePost = {id: v1(), text: text}
+        setPost([makePost, ...post])
+    }
+
+
+    const mapPostsData = post.map( (el) => <Posts message={el.text}/>)
+
+
     return (
         <div>
             <div className={s.my__data}>
@@ -38,13 +47,14 @@ export const Profile = () => {
             </div>
 
             <div>
-                <MyPosts/>
+                <MyPosts
+                    makePosts={makePosts}
+                    postsData={postsData}
+
+                />
             </div>
             <div>
-                <Posts message={'Hello my friends'}/>
-                <Posts message={'First post'}/>
-                <Posts message={"dsfsdfsdf"}/>
-
+                {mapPostsData}
             </div>
         </div>
 

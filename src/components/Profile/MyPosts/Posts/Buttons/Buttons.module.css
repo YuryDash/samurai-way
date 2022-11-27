@@ -1,41 +1,44 @@
-.buttonLike{
-    background-color: #3b626f;
-    color: white;
-    padding: 5px;
-    border-radius: 5px;
-    margin: 0px 10px;
-    border: none;
-    box-shadow: 1px 1px 3px black;
-    cursor: pointer;
-    font-family: Cinzel;
-}
-.buttonLike:active{
-    box-shadow: none;
-}
+/*.buttonLike{*/
+/*    background-color: #3b626f;*/
+/*    color: white;*/
+/*    padding: 5px;*/
+/*    border-radius: 5px;*/
+/*    margin: 0px 10px;*/
+/*    border: none;*/
+/*    box-shadow: 1px 1px 3px black;*/
+/*    cursor: pointer;*/
+/*    font-family: Cinzel;*/
+/*}*/
+/*.buttonLike:active{*/
+/*    box-shadow: none;*/
+/*}*/
 
-.buttonDis{
-    box-shadow: 1px 1px 3px black;
-    border: none;
-    background-color: #3b626f;
-    color: #f18a8a;
-    padding: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: Cinzel;
-}
-.buttonDis:active{
-    box-shadow: none;
-}
-.buttonDis:hover{
-    background-color: #487686;
-}
-.buttonLike:hover{
-    background-color: #487686;
-}
-.likeNum{
-    font-size: 20px;
-}
-.disLikeNum{
-    font-size: 20px;
-    color: red;
-}
+/*.buttonDis{*/
+/*    box-shadow: 1px 1px 3px black;*/
+/*    border: none;*/
+/*    background-color: #3b626f;*/
+/*    color: #f18a8a;*/
+/*    padding: 5px;*/
+/*    border-radius: 5px;*/
+/*    cursor: pointer;*/
+/*    font-family: Cinzel;*/
+/*}*/
+/*.buttonDis:active{*/
+/*    box-shadow: none;*/
+/*}*/
+/*.buttonDis:hover{*/
+/*    background-color: #487686;*/
+/*}*/
+/*.buttonLike:hover{*/
+/*    background-color: #487686;*/
+/*}*/
+/*.likeNum{*/
+/*    font-size: 20px;*/
+/*}*/
+/*.disLikeNum{*/
+/*    font-size: 20px;*/
+/*    color: red;*/
+/*}*/
+
+
+
