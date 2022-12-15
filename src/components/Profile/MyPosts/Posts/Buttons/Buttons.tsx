@@ -15,7 +15,7 @@ export type PropsButtons = {
 export const Buttons = (props: PropsButtons) => {
 
     return(
-        <button className={`${s.go} ${s.neGo}`} onClick={props.callBack}>{props.name}</button>
+        <button className={s.button} onClick={props.callBack}>{props.name}</button>
     )
 }
 

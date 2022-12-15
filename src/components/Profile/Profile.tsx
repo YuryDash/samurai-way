@@ -5,19 +5,19 @@ import {Posts} from "./MyPosts/Posts/Posts";
 import {v1} from "uuid";
 
 
-
 export const Profile = () => {
 
     let postsData = [
         {id: v1(), text: 'hi how are u?'},
         {id: v1(), text: 'u?'},
     ]
+
     let [post, setPost] = useState(postsData)
 
 
     const makePosts = (text: string) => {
         let makePost = {id: v1(), text: text}
-        setPost([makePost, ...post])
+        setPost([ ...post, makePost])
     }
 
 
@@ -37,7 +37,7 @@ export const Profile = () => {
                     <div>
                         Yury Dashukevich
                     </div>
-                    <div >
+                    <div>
                         <div>Date of birth: <span> 12.06</span></div>
                         <div>City: <span> Minsk</span></div>
                         <div>Education: <span> Auto Mechanical College</span></div>

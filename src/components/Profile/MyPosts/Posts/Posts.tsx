@@ -10,11 +10,11 @@ type PropsMessType = {
 
 export const Posts = (props: PropsMessType) => {
     //========================================
+    let [like, setLike] = useState(0)
 
     const onClickHandlerL = () => {
         setLike(++like)
     }
-    let [like, setLike] = useState(0)
     //================================================
     let [disLike, setDisLike] = useState(0)
 
@@ -32,7 +32,7 @@ export const Posts = (props: PropsMessType) => {
                 <div className={s.userName}>Escanor</div>
             </div>
             <div className={s.text}>{props.message}</div>
-            <Buttons callBack={onClickHandlerD} name={`dislike: ` + disLike}/>
+            <Buttons className={s.ditch} callBack={onClickHandlerD} name={`dislike: ` + disLike}/>
             <Buttons callBack={onClickHandlerL} name={`like: ` + like}/>
         </div>
     )

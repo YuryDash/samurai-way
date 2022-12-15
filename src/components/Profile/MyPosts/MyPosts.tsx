@@ -14,11 +14,13 @@ type PropsType = {
 
 export const MyPosts = (props: PropsType) => {
 
-    let [newPost, setNewPost] = useState('')
+    const [newPost, setNewPost] = useState('');
 
     const onClickHandler = () => {
-        props.makePosts(newPost)
-        setNewPost('')
+        if (newPost!==''){
+            props.makePosts(newPost.trim())
+            setNewPost('')
+        }
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewPost(e.currentTarget.value)

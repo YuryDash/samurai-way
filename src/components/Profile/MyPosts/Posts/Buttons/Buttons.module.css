@@ -41,4 +41,22 @@
 /*}*/
 
 
+.button{
+    background-color: #3b626f;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 0px 10px;
+    border: none;
+    box-shadow: 1px 1px 3px black;
+    cursor: pointer;
+    font-family: Cinzel;
+    font-size: 18px;
+}
+.button:active{
+    box-shadow: none;
+}
+.button:hover{
+    background-color: #487686;
+}
 
