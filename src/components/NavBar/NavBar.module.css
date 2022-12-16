@@ -20,3 +20,34 @@
 .item {
     margin-bottom: 15px;
 }
+
+/*================================block best friends===============================*/
+.bestFriends{
+    font-size: 22px;
+    margin-top: 100px;
+    margin-left: 20px;
+}
+
+.friends{
+    margin-top: 30px;
+    display: flex;
+}
+.friends a{
+    text-decoration: none;
+    color: #202128;
+}
+.friends__item{
+    padding: 5px;
+}
+.friends__avatar{
+    width: 40px;
+    height: 40px;
+    background-color: #202128;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #C7C7C7;
+    font-weight: bold;
+    font-size: 22px;
+}

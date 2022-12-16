@@ -1,12 +1,7 @@
-import React, {ChangeEvent, useState, KeyboardEvent} from "react";
+import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import s from "./MyPosts.module.css"
 import {Buttons} from "./Posts/Buttons/Buttons";
-import {v1} from "uuid";
 
-type PropsArrType = {
-    id: string
-    text: string
-}
 type PropsType = {
     makePosts: (text: string) => void
 }
@@ -16,7 +11,7 @@ export const MyPosts = (props: PropsType) => {
     let [newPost, setNewPost] = useState('');
 
     const onClickHandler = () => {
-        if (newPost!==''){
+        if (newPost.trim() !== '') {
             props.makePosts(newPost.trim())
             setNewPost('')
         }
@@ -33,6 +28,7 @@ export const MyPosts = (props: PropsType) => {
             <div className={s.newPostTitle}>NEW POST</div>
             <div className={s.newPost}>
                 <input
+                    maxLength={60}
                     value={newPost}
                     onChange={onChangeHandler}
                     onKeyDown={OnKeyDownHandler}

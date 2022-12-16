@@ -9,6 +9,7 @@ export function DialogItem(props: DialogsDataType) {
 
         return (
             <div className={s.dialog}>
+                <div className={s.avatar}>{props.name[0]}</div>
                 <NavLink to={path}>{props.name}</NavLink>
             </div>
     )

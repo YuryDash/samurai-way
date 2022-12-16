@@ -22,27 +22,31 @@ export type PostsDataType = {
     id: string
     text: string
 }
-
 type AppPropsType = {
     messagesData: MessagesDataType[]
     dialogsData: DialogsDataType[]
     postsData: PostsDataType[]
 }
+type PropsType = {
+    state:AppPropsType
+}
 
-const App = (props: AppPropsType) => {
+
+const App = (props: PropsType) => {
 
     return (
 
         <div className='app-wrapper'>
             <Header/>
-            <NavBar/>
+            <NavBar friendsName={props.state.dialogsData}/>
             <div className="app-wrapper-content">
                 <Routes>
 
-                    <Route path='/profile' element={<Profile postsData={props.postsData}/>}/>
+                    <Route path='/profile' element={<Profile
+                        postsData={props.state.postsData}/>}/>
                     <Route path='/dialogs' element={<Dialogs
-                        dialogsData={props.dialogsData}
-                        messagesData={props.messagesData}
+                        dialogsData={props.state.dialogsData}
+                        messagesData={props.state.messagesData}
                     />}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>

@@ -5,36 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import {v1} from "uuid";
-
-let messagesData = [
-    {id: v1(), message: 'hi'},
-    {id: v1(), message: 'Hello my friend'},
-    {id: v1(), message: 'Yo'},
-    {id: v1(), message: 'Yo maan'},
-]
-let dialogsData = [
-    {id: v1(), name: 'Andrzej'},
-    {id: v1(), name: 'Piotrek'},
-    {id: v1(), name: 'Bartek'},
-    {id: v1(), name: 'Franek'},
-    {id: v1(), name: 'Marek'},
-    {id: v1(), name: 'Adam'},
-]
-let postsData = [
-    {id: v1(), text: 'hi how are u?'},
-    {id: v1(), text: 'u?'},
-]
+import {state} from "./redux/state";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
         <BrowserRouter>
-            <App
-                messagesData={messagesData}
-                dialogsData={dialogsData}
-                postsData={postsData}
-            />
+            <App state={state}/>
         </BrowserRouter>
 );
 

@@ -23,7 +23,6 @@ export function Profile(props: PropsType) {
         let makePost = {id: v1(), text: text}
         setPost([ ...post, makePost])
     }
-
     const deletePost = (id: string) => {
         setPost( post.filter( el => el.id !== id ) )
     }
