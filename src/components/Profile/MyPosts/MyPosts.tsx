@@ -8,13 +8,12 @@ type PropsArrType = {
     text: string
 }
 type PropsType = {
-    postsData: PropsArrType[]
     makePosts: (text: string) => void
 }
 
 export const MyPosts = (props: PropsType) => {
 
-    const [newPost, setNewPost] = useState('');
+    let [newPost, setNewPost] = useState('');
 
     const onClickHandler = () => {
         if (newPost!==''){

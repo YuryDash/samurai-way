@@ -3,26 +3,32 @@ import s from "./Profile.module.css"
 import {MyPosts} from "./MyPosts/MyPosts";
 import {Posts} from "./MyPosts/Posts/Posts";
 import {v1} from "uuid";
+import {UserInfo} from "./UserInfo/UserInfo";
+import {PostsDataType} from "../../App";
 
+type PropsType = {
+    postsData: PostsDataType[]
+}
 
-export const Profile = () => {
+export function Profile(props: PropsType) {
 
-    let postsData = [
-        {id: v1(), text: 'hi how are u?'},
-        {id: v1(), text: 'u?'},
-    ]
+    // let postsData = [
+    //     {id: v1(), text: 'hi how are u?'},
+    //     {id: v1(), text: 'u?'},
+    // ]
 
-    let [post, setPost] = useState(postsData)
-
+    let [post, setPost] = useState(props.postsData)
 
     const makePosts = (text: string) => {
         let makePost = {id: v1(), text: text}
         setPost([ ...post, makePost])
     }
 
+    const deletePost = (id: string) => {
+        setPost( post.filter( el => el.id !== id ) )
+    }
 
-    const mapPostsData = post.map( (el) => <Posts message={el.text}/>)
-
+    const mapPostsData = post.map( (el) => <Posts deletePost={deletePost} id={el.id} message={el.text}/>)
 
     return (
         <div>
@@ -32,26 +38,11 @@ export const Profile = () => {
                         src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/escanor-of-pride-nanatsu-no-taizai-kitaru-normin.jpg"
                         alt="Just Avatar"/>
                 </div>
-
-                <div className={s.info}>
-                    <div>
-                        Yury Dashukevich
-                    </div>
-                    <div>
-                        <div>Date of birth: <span> 12.06</span></div>
-                        <div>City: <span> Minsk</span></div>
-                        <div>Education: <span> Auto Mechanical College</span></div>
-                        <div>Web-site: <a href="src/components/Profile/Profile#">https://img2.joyreactor.cc</a></div>
-                    </div>
-                </div>
+                <UserInfo/>
             </div>
 
             <div>
-                <MyPosts
-                    makePosts={makePosts}
-                    postsData={postsData}
-
-                />
+                <MyPosts makePosts={makePosts}  />
             </div>
             <div>
                 {mapPostsData}

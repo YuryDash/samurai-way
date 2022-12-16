@@ -1,15 +1,11 @@
 import React from "react";
 import s from "./Buttons.module.css"
 
-
-
-
 export type PropsButtons = {
     name: string
     callBack: ()=> void
     className?: string
 }
-
 
 
 export const Buttons = (props: PropsButtons) => {
