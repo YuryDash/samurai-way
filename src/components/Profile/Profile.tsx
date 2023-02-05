@@ -12,22 +12,18 @@ type PropsType = {
 
 export function Profile(props: PropsType) {
 
-    // let postsData = [
-    //     {id: v1(), text: 'hi how are u?'},
-    //     {id: v1(), text: 'u?'},
-    // ]
-
     let [post, setPost] = useState(props.postsData)
 
     const makePosts = (text: string) => {
         let makePost = {id: v1(), text: text}
         setPost([ ...post, makePost])
     }
+
     const deletePost = (id: string) => {
         setPost( post.filter( el => el.id !== id ) )
     }
 
-    const mapPostsData = post.map( (el) => <Posts deletePost={deletePost} id={el.id} message={el.text}/>)
+    const mapPostsData = post.map( (el) => <Posts key={el.id} deletePost={deletePost} id={el.id} message={el.text}/>)
 
     return (
         <div>

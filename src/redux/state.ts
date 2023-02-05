@@ -1,6 +1,7 @@
 import {v1} from "uuid";
+import {AppPropsType} from "../App";
 
-export let state = {
+export let state: AppPropsType = {
     postsData: [
         {id: v1(), text: 'hi how are u?'},
         {id: v1(), text: 'u?'},
@@ -19,4 +20,8 @@ export let state = {
         {id: v1(), message: 'Yo'},
         {id: v1(), message: 'Yo maan'},
     ]
+}
+export let addPost = (postMessage: string)=> {
+    let newPost = {id: v1(), text: postMessage}
+    state.postsData.push(newPost)
 }
