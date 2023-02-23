@@ -8,48 +8,36 @@ import {Route, Routes} from "react-router-dom";
 import {Settings} from "./components/Settings/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
+import {AppPropsType, StoreType} from "./redux/state";
 
-
-export type MessagesDataType = {
-    id: string
-    message: string
-}
-export type DialogsDataType = {
-    id: string
-    name: string
-}
-export type PostsDataType = {
-    id: string
-    text: string
-}
-export type AppPropsType = {
-    postsData: PostsDataType[]
-    messagesData: MessagesDataType[]
-    dialogsData: DialogsDataType[]
-}
-type PropsType = {
+export type PropsType = {
+    store: StoreType
     state: AppPropsType
+    dispatch: (action: any) => void
 }
 
 
 const App = (props: PropsType) => {
-
     return (
 
         <div className='app-wrapper'>
             <Header/>
-            <NavBar friendsName={props.state.dialogsData}/>
+            <NavBar friendsName={props.state.dialogsData.dialogs}/>
             <div className="app-wrapper-content">
                 <Routes>
 
                     <Route path='/profile' element={
                         <Profile
-                            postsData={props.state.postsData}/>}
+                            postsData={props.state.postsData}
+                            dispatch={props.dispatch}
+                        />}
                     />
                     <Route path='/dialogs' element={
                         <Dialogs
-                            dialogsData={props.state.dialogsData}
-                            messagesData={props.state.messagesData}
+                            // dialogsData={props.state.dialogsData}
+                            // messagesData={props.state.messagesData}
+                            // newMessageBody={props.state.newMessageBody}
+                            store={props.store}
                         />
                     }
                     />

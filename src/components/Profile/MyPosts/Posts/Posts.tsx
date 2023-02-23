@@ -6,7 +6,6 @@ import {Buttons} from "./Buttons/Buttons";
 type PropsMessType = {
     message: string
     id: string
-    deletePost: (id: string) => void
 }
 export const Posts = (props: PropsMessType) => {
     //========================================
@@ -21,8 +20,9 @@ export const Posts = (props: PropsMessType) => {
     const onClickHandlerD = () => {
         setDisLike(++disLike)
     }
+
     const deletePostHandler = () => {
-        props.deletePost(props.id)
+
     }
 
     return (

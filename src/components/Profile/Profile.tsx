@@ -2,28 +2,30 @@ import React, {useState} from "react";
 import s from "./Profile.module.css"
 import {MyPosts} from "./MyPosts/MyPosts";
 import {Posts} from "./MyPosts/Posts/Posts";
-import {v1} from "uuid";
 import {UserInfo} from "./UserInfo/UserInfo";
-import {PostsDataType} from "../../App";
+import { PostsDataType} from "../../redux/state";
+import {addPostAC} from "../../redux/profile-reducer";
+
 
 type PropsType = {
-    postsData: PostsDataType[]
+    postsData: PostsDataType
+    dispatch: (action: any) => void
 }
+
+
 
 export function Profile(props: PropsType) {
 
-    let [post, setPost] = useState(props.postsData)
+    let [post, setPost] = useState(props.postsData.posts)
 
     const makePosts = (text: string) => {
-        let makePost = {id: v1(), text: text}
-        setPost([ ...post, makePost])
+        console.log(text + ' fn make post ')
+        props.dispatch(addPostAC(text))
     }
 
-    const deletePost = (id: string) => {
-        setPost( post.filter( el => el.id !== id ) )
-    }
+    const mapPostsData = post.map( (el) => <Posts key={el.id} id={el.id} message={el.text}/>)
 
-    const mapPostsData = post.map( (el) => <Posts key={el.id} deletePost={deletePost} id={el.id} message={el.text}/>)
+
 
     return (
         <div>
@@ -37,12 +39,13 @@ export function Profile(props: PropsType) {
             </div>
 
             <div>
-                <MyPosts makePosts={makePosts}  />
+                <MyPosts makePosts={makePosts}
+                         newPostText={props.postsData.newPostsText}
+                         dispatch={props.dispatch}/>
             </div>
             <div>
                 {mapPostsData}
             </div>
         </div>
-
     )
 }
