@@ -1,17 +1,18 @@
 import React from "react";
 import s from "./NavBar.module.css"
 import {NavLink} from "react-router-dom";
-import {DialogsDataType} from "../../App";
+import {DialogsType} from "../../redux/store";
 //задал переменую класса актив
 let active = s.active;
 
 type PropsType = {
-    friendsName: DialogsDataType[]
+    friendsName: DialogsType[]
 }
 
 export const NavBar = (props: PropsType) => {
 
     let threeBestFriends = props.friendsName.map( el => el.name ).slice(0, 3)
+    // let threeBestFriends = props.friendsName.map( el => el.dialogs.map( el => el.name ) ).slice(0, 3)
     let path = "/dialogs/" + props.friendsName.map( el => el.id ).slice(0, 3)
 
     return (

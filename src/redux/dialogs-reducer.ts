@@ -1,12 +1,29 @@
 import {v1} from "uuid";
-import {DialogsDataType, MessagesDataType} from "./state";
-
+import {DialogsDataType, MessagesDataType} from "./store";
 
 type SendMessageAT = ReturnType<typeof sendMessageAC>
 type UpdateMessageAT = ReturnType<typeof updateNewMessageBodyAC>
 type ActionType = SendMessageAT | UpdateMessageAT
 
-export const dialogsReducer = (state: DialogsDataType, action: ActionType): DialogsDataType => {
+const initialState:DialogsDataType = {
+    dialogs: [
+        {id: v1(), name: 'Andrzej'},
+        {id: v1(), name: 'Piotrek'},
+        {id: v1(), name: 'Bartek'},
+        {id: v1(), name: 'Franek'},
+        {id: v1(), name: 'Marek'},
+        {id: v1(), name: 'Adam'}
+    ],
+        messagesData: [
+        {id: v1(), message: 'hi'},
+        {id: v1(), message: 'Hello my friend'},
+        {id: v1(), message: 'Yo'},
+        {id: v1(), message: 'Yo maan'},
+    ],
+        newMessageBody: ''
+}
+
+export const dialogsReducer = (state: DialogsDataType = initialState, action: ActionType): DialogsDataType => {
 
     switch (action.type) {
 

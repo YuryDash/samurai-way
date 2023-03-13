@@ -1,28 +1,25 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import React, {ChangeEvent, KeyboardEvent} from "react";
 import s from "./MyPosts.module.css"
 import {Buttons} from "./Posts/Buttons/Buttons";
-import {updatePostAC} from "../../../redux/profile-reducer";
 
 type PropsType = {
-    makePosts: (text: string) => void
     newPostText: string
-    dispatch: (action: any) => void
+    makePostsCo: (text: string) => void
+    onChangeMyPosts: (currentValue: string) => void
 }
 let text: string;
 
 export const MyPosts = (props: PropsType) => {
 
     const onPostChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-
         text = e.currentTarget.value
-        console.log(text)
-        props.dispatch(updatePostAC(text))
+        props.onChangeMyPosts(text)
     }
 
     const onClickHandler = () => {
         if (text.trim() !== '') {
-            props.makePosts(text.trim())
-            console.log( text + ' PushButton or mouth')
+            props.makePostsCo(text.trim())
+            text = ''
         }
     }
 
@@ -40,7 +37,7 @@ export const MyPosts = (props: PropsType) => {
                     onChange={onPostChangeHandler}
                     onKeyDown={OnKeyDownHandler}
                     className={s.inputArea}
-                    placeholder={'New Posts'}
+                    placeholder={'My Posts'}
                     id="1">
                 </input>
 

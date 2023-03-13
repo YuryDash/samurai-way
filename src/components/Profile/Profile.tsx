@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import s from "./Profile.module.css"
-import {MyPosts} from "./MyPosts/MyPosts";
 import {Posts} from "./MyPosts/Posts/Posts";
 import {UserInfo} from "./UserInfo/UserInfo";
-import { PostsDataType} from "../../redux/state";
 import {addPostAC} from "../../redux/profile-reducer";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {PostsDataType} from "../../redux/store";
 
 
 type PropsType = {
@@ -16,16 +16,14 @@ type PropsType = {
 
 export function Profile(props: PropsType) {
 
-    let [post, setPost] = useState(props.postsData.posts)
+    // let [post, setPost] = useState(props.postsData.posts)
 
     const makePosts = (text: string) => {
         console.log(text + ' fn make post ')
         props.dispatch(addPostAC(text))
     }
 
-    const mapPostsData = post.map( (el) => <Posts key={el.id} id={el.id} message={el.text}/>)
-
-
+    const mapPostsData = props.postsData.posts.map( el => <Posts key={el.id} message={el.text} id={el.id}/>)
 
     return (
         <div>
@@ -39,7 +37,7 @@ export function Profile(props: PropsType) {
             </div>
 
             <div>
-                <MyPosts makePosts={makePosts}
+                <MyPostsContainer makePosts={makePosts}
                          newPostText={props.postsData.newPostsText}
                          dispatch={props.dispatch}/>
             </div>
