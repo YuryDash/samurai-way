@@ -4,29 +4,18 @@ import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 import React from "react";
 
-// import {Provider} from "react-redux";
- import {RootStateType, store} from "./redux/store-redux";
+import {Provider} from "react-redux";
+import {store} from "./redux/store-redux";
 
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
-export let rerenderEntireTree = (state: RootStateType) => {
-    root.render(
-        // <Provider store={store}>
-            <BrowserRouter>
-                <App
-                    state={state}
-                    dispatch={store.dispatch.bind(store)}
-                    />
-            </BrowserRouter>
+root.render(
+    <BrowserRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </BrowserRouter>
+);
 
-        //</Provider>
-    );
-}
-
-rerenderEntireTree(store.getState())
-store.subscribe( () => {
-    rerenderEntireTree(store.getState())
-} )
-// reportWebVitals();

@@ -2,28 +2,18 @@ import React from "react";
 import s from "./Profile.module.css"
 import {Posts} from "./MyPosts/Posts/Posts";
 import {UserInfo} from "./UserInfo/UserInfo";
-import {addPostAC} from "../../redux/profile-reducer";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {PostsDataType} from "../../redux/store";
 
 
 type PropsType = {
     postsData: PostsDataType
-    dispatch: (action: any) => void
 }
-
 
 
 export function Profile(props: PropsType) {
 
-    // let [post, setPost] = useState(props.postsData.posts)
-
-    const makePosts = (text: string) => {
-        console.log(text + ' fn make post ')
-        props.dispatch(addPostAC(text))
-    }
-
-    const mapPostsData = props.postsData.posts.map( el => <Posts key={el.id} message={el.text} id={el.id}/>)
+    const mapPostsData = props.postsData.posts.map(el => <Posts key={el.id} message={el.text} id={el.id}/>)
 
     return (
         <div>
@@ -37,9 +27,7 @@ export function Profile(props: PropsType) {
             </div>
 
             <div>
-                <MyPostsContainer makePosts={makePosts}
-                         newPostText={props.postsData.newPostsText}
-                         dispatch={props.dispatch}/>
+                <MyPostsContainer state={props.postsData} />
             </div>
             <div>
                 {mapPostsData}

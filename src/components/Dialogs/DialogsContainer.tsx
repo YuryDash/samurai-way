@@ -1,28 +1,20 @@
-import React from "react";
 import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
-import {RootStateType} from "../../redux/store-redux";
+import {connect} from "react-redux";
+import {DialogsDataType} from "../../redux/store";
+import {Action, Dispatch} from "redux";
 
-type DialogsContainerPropsType = {
-    state: RootStateType
-    dispatch: (action: any)=> void
+let mapStateToProps = (state: DialogsDataType) => {
+    return {
+        dialogs: state.dialogs
+    }
 }
 
-export function DialogsContainer(props: DialogsContainerPropsType) {
-
-    const onSendMessageClickCo = () => {
-        props.dispatch(sendMessageAC())
+let mapDispatchToProps = (dispatch: Dispatch<Action>) => {
+    return {
+        onSendMessageClickCo: () => {dispatch(sendMessageAC())},
+        onNewMessageChangeCo: (textValue: string) => {dispatch(updateNewMessageBodyAC(textValue))}
     }
-    const onNewMessageChangeCo = (textValue: string) => {
-         props.dispatch(updateNewMessageBodyAC(textValue))
-    }
-
-
-    return (
-        <Dialogs
-            dialogsData={props.state.dialogsReducer}
-            onSendMessageClickCo={onSendMessageClickCo}
-            onNewMessageChangeCo={onNewMessageChangeCo}
-        />
-     );
 }
+// Первые скобки вызов коннект , а вторые вызов функции которую возвращает connect
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
