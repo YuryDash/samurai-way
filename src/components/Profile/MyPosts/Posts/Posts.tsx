@@ -7,6 +7,7 @@ type PropsMessType = {
     message: string
     id: string
 }
+
 export const Posts = (props: PropsMessType) => {
     //========================================
     let [like, setLike] = useState(0)

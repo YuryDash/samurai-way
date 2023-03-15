@@ -1,30 +1,33 @@
 import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogsItem/DialogItem";
-import {Messages} from "./Messages/Messages";
-import {DialogsDataType} from "../../redux/store";
+import {DialogMessages} from "./DialogMessages/DialogMessages";
+import {DialogsType, MessagesDataType} from "../../redux/store";
 
 type DialogPropsType = {
 
-    dialogsData: DialogsDataType
-    onSendMessageClickCo: () => void
+    dialogs:  DialogsType[]
+    messagesData: MessagesDataType[]
+    newMessageBody: string
+
+    onSendMessageClickCo: (body: string) => void
     onNewMessageChangeCo: (textValue: string) => void
 
 }
-
 export function Dialogs(props: DialogPropsType) {
 
-    let dialogElements = props.dialogsData.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id}/>)
-    let messageElements = props.dialogsData.messagesData.map(el => <Messages key={el.id} id={el.id}
-                                                                             message={el.message}/>)
-    let newMessageBody = props.dialogsData.newMessageBody;
-
+    let dialogElements = props.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id}/>)
+    // let dialogElements = props.dialogsData.dialogsReducer.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id}/>)
+    let messageElements = props.messagesData.map(el => <DialogMessages key={el.id} id={el.id}
+                                                                                   message={el.message}/>)
     const onSendMessageClick = () => {
-        props.onSendMessageClickCo()
+        if (props.newMessageBody.trim() !== ''){
+            props.onSendMessageClickCo(props.newMessageBody)
+        }
     }
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let body = e.target.value
-        props.onNewMessageChangeCo(body)
+         let textValue = e.currentTarget.value
+        props.onNewMessageChangeCo(textValue)
     }
     return (
         <>
@@ -40,7 +43,7 @@ export function Dialogs(props: DialogPropsType) {
             <div>
                 <div>
                     <textarea placeholder={'Enter your message'}
-                              value={newMessageBody}
+                              value={props.newMessageBody}
                               onChange={onNewMessageChange}
                     >
                             </textarea>

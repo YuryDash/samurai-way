@@ -9,7 +9,6 @@ import {DialogsType} from "../../../redux/store";
 export function DialogItem(props: DialogsType) {
         let path = "/dialogs/" + props.id
 
-
         return (
             <div className={s.dialog}>
                 <div className={s.avatar}>{props.name[0]}</div>

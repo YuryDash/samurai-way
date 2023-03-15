@@ -5,7 +5,7 @@ type SendMessageAT = ReturnType<typeof sendMessageAC>
 type UpdateMessageAT = ReturnType<typeof updateNewMessageBodyAC>
 type ActionType = SendMessageAT | UpdateMessageAT
 
-const initialState:DialogsDataType = {
+const initialState: DialogsDataType = {
     dialogs: [
         {id: v1(), name: 'Andrzej'},
         {id: v1(), name: 'Piotrek'},
@@ -14,29 +14,25 @@ const initialState:DialogsDataType = {
         {id: v1(), name: 'Marek'},
         {id: v1(), name: 'Adam'}
     ],
-        messagesData: [
+    messagesData: [
         {id: v1(), message: 'hi'},
         {id: v1(), message: 'Hello my friend'},
         {id: v1(), message: 'Yo'},
         {id: v1(), message: 'Yo maan'},
     ],
-        newMessageBody: ''
+    newMessageBody: ''
 }
 
 export const dialogsReducer = (state: DialogsDataType = initialState, action: ActionType): DialogsDataType => {
 
     switch (action.type) {
+        case "SEND_MESSAGE":
+            let newMessage: MessagesDataType = {id: v1(), message: action.payload.body}
+            console.log(newMessage.message)
+            return {...state, messagesData: [...state.messagesData, newMessage], newMessageBody: ""}
 
         case "UPDATE_NEW_MESSAGE_BODY":
-            // return state.newMessageBody = action.payload.body
-       return { ...state, newMessageBody: action.payload.body}
-
-        case "SEND_MESSAGE":
-            const body = state.newMessageBody;
-            const newMessage: MessagesDataType = {id: v1(), message: body}
-            state.newMessageBody = '';
-            let messDataNeRabotaet = state.messagesData;
-            return {...state, messagesData: [...messDataNeRabotaet, newMessage]}
+            return {...state, newMessageBody: action.payload.body}
 
         default:
             return state;
@@ -52,6 +48,7 @@ export const updateNewMessageBodyAC = (body: string) => {
         }
     } as const
 }
-export const sendMessageAC = () => {
-    return {type: "SEND_MESSAGE",} as const
+
+export const sendMessageAC = (body: string) => {
+    return {type: "SEND_MESSAGE", payload:{body}} as const
 }

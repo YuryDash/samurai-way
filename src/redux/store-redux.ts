@@ -4,8 +4,8 @@ import {profileReducer} from "./profile-reducer";
 
 
 const rootReducer = combineReducers({
-     profileReducer,
-     dialogsReducer,
+     profileReducer:profileReducer,
+     dialogsReducer: dialogsReducer,
 })
 
 

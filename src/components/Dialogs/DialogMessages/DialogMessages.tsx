@@ -3,7 +3,7 @@ import React from "react";
 import {MessagesDataType} from "../../../redux/store";
 
 
-export function Messages  (props: MessagesDataType) {
+export function DialogMessages  (props: MessagesDataType) {
     return (
         <div key={props.id} className={s.message}>{props.message}</div>
     )

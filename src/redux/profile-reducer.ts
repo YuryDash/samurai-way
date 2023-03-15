@@ -1,14 +1,13 @@
 import {v1} from "uuid";
 import {PostsDataType, PostsType} from "./store";
 
-
 type AddPostAT = ReturnType<typeof addPostAC>
 type UpdateNewPostAT = ReturnType<typeof updatePostAC>
 type ActionType = AddPostAT | UpdateNewPostAT
 
 const initialState: PostsDataType = {
     posts: [{id: v1(), text: 'Starts'}],
-    newPostsText: ''
+    newPostsText: ""
 }
 
 export const profileReducer = (state: PostsDataType = initialState, action: ActionType): PostsDataType => {
@@ -16,13 +15,11 @@ export const profileReducer = (state: PostsDataType = initialState, action: Acti
     switch (action.type) {
         case "ADD_POST":
             let newPost: PostsType = {id: v1(), text: action.payload.text};
-            let postsNeDestrukturiruetsia = [...state.posts]
-            state.newPostsText = '';
-            return {...state, posts: [newPost, ...postsNeDestrukturiruetsia]}
+            return {...state, posts: [...state.posts, newPost], newPostsText: ''}
 
         case "UPDATE_NEW_POST_TEXT":
-            // state.newPostsText = action.payload.text;
             return {...state, newPostsText: action.payload.text}
+
         default:
             return state
     }

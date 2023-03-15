@@ -1,11 +1,16 @@
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import s from "./MyPosts.module.css"
 import {Buttons} from "./Posts/Buttons/Buttons";
+// import {useSelector} from "react-redux";
+// import {RootStateType} from "../../../redux/store-redux";
+import {PostsType} from "../../../redux/store";
+import {Posts} from "./Posts/Posts";
 
 type PropsType = {
     newPostText: string
     makePostsCo: (text: string) => void
     onChangeMyPosts: (currentValue: string) => void
+    posts: PostsType[]
 }
 let text: string;
 
@@ -17,8 +22,8 @@ export const MyPosts = (props: PropsType) => {
     }
 
     const onClickHandler = () => {
-        if (text.trim() !== '') {
-            props.makePostsCo(text.trim())
+        if (props.newPostText.trim() !== '') {
+            props.makePostsCo(props.newPostText.trim())
             text = ''
         }
     }
@@ -26,6 +31,11 @@ export const MyPosts = (props: PropsType) => {
 
     const OnKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => e.key === "Enter" ?
         onClickHandler() : ''
+
+    // const posts = useSelector<RootStateType, PostsType[]>((state) => state.profileReducer.posts)
+    // const mapPostsData = posts.map((el: any) => <Posts key={el.id} message={el.text} id={el.id}/>)
+    // рефактор на ЮзСЕЛЕКТОР от саппорта!!!!!!
+    const mapPostsData = props.posts.map((el: any) => <Posts key={el.id} message={el.text} id={el.id}/>)
 
     return (
         <div className={s.my__post}>
@@ -40,9 +50,10 @@ export const MyPosts = (props: PropsType) => {
                     placeholder={'My Posts'}
                     id="1">
                 </input>
-
                 <Buttons name={'Add Posts'} callBack={onClickHandler}/>
-
+            </div>
+            <div>
+                {mapPostsData}
             </div>
         </div>
     );

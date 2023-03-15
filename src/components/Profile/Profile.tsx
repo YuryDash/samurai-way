@@ -1,20 +1,10 @@
 import React from "react";
 import s from "./Profile.module.css"
-import {Posts} from "./MyPosts/Posts/Posts";
 import {UserInfo} from "./UserInfo/UserInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-import {PostsDataType} from "../../redux/store";
 
 
-type PropsType = {
-    postsData: PostsDataType
-}
-
-
-export function Profile(props: PropsType) {
-
-    const mapPostsData = props.postsData.posts.map(el => <Posts key={el.id} message={el.text} id={el.id}/>)
-
+export function Profile() {
     return (
         <div>
             <div className={s.my__data}>
@@ -27,10 +17,7 @@ export function Profile(props: PropsType) {
             </div>
 
             <div>
-                <MyPostsContainer state={props.postsData} />
-            </div>
-            <div>
-                {mapPostsData}
+                <MyPostsContainer/>
             </div>
         </div>
     )
