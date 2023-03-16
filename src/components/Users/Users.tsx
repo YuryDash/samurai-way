@@ -1,19 +1,37 @@
 import React from "react";
 import {UserType} from "../../redux/users-reducer";
 import s from "./Users.module.css"
+import axios from "axios";
 
 type PropsType = {
     users: UserType[]
     followUser: (userID:string) => void
     unFollowUser: (userID:string) => void
-    setNewUsers?: (users: UserType[])=> void
+    setNewUsers: (users: any)=> void
 }
 
 export const Users = (props: PropsType) => {
     // const users = useSelector<RootStateType, UserType[]>(state => state.usersPage.users)
+
+    axios.get("https://social-network.samuraijs.com/api/1.0/users").then((response) => {
+
+        props.setNewUsers( response.data.items)
+        return console.log('lol')
+    } )
+
+    // if (props.users.length === 0) {
+    //     props.setNewUsers(   [
+    //         {id: v1(), followed: true, fullName: "Snickers", status: "I'm a boss", location: {city: "Minsk", country: "Belarus"}},
+    //         {id: v1(), followed: true, fullName: "Hottabych", status: "I'm a boss", location: {city: "Minsk", country: "Cyprus"}},
+    //         {id: v1(), followed: false, fullName: "Saske", status: "I'm a boss", location: {city: "Minsk", country: "Tbilisi"}},
+    //         {id: v1(), followed: true, fullName: "ALADDIN-BLEEET", status: "I'm a boss", location: {city: "Minsk", country: "KNDR"}},
+    //     ])
+    // }
+
     const mappedUsers = props.users.map(el => {
         return (
             <div className={s.user}
+                 key={el.id}
                  style={{
                      display: "flex",
                      margin: "20px"
@@ -71,7 +89,7 @@ export const Users = (props: PropsType) => {
                         flexDirection: 'column',
                         justifyContent: 'space-between'
                     }}>
-                        <div className={s.user__name}>{el.fullName}</div>
+                        <div className={s.user__name}>{el.name}</div>
                         <div className={s.user__status}>{el.status}</div>
                     </div>
                     <div className={s.user__live} style={{
@@ -79,8 +97,8 @@ export const Users = (props: PropsType) => {
                         flexDirection: 'column',
                         justifyContent: 'space-between'
                     }}>
-                        <div className={s.user__country}>{el.location.country}</div>
-                        <div className={s.user__city}>{el.location.city}</div>
+                        <div className={s.user__country}>{'el.location.country'}</div>
+                        <div className={s.user__city}>{'el.location.city'}</div>
                     </div>
                 </div>
             </div>
