@@ -25,6 +25,9 @@ export const NavBar = (props: PropsType) => {
                     <NavLink className={({isActive}) => isActive ? active : ''} to="/dialogs">Messages</NavLink>
                 </div>
                 <div className={s.item}>
+                    <NavLink className={({isActive}) => isActive ? active : ''} to="/users">Users</NavLink>
+                </div>
+                <div className={s.item}>
                     <NavLink className={({isActive}) => isActive ? active : ''} to="/news">News</NavLink>
                 </div>
                 <div className={s.item}>

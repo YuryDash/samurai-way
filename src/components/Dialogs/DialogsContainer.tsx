@@ -6,9 +6,9 @@ import {RootStateType} from "../../redux/store-redux";
 
 let mapStateToProps = (state: RootStateType) => {
     return {
-        dialogs: state.dialogsReducer.dialogs,
-        messagesData: state.dialogsReducer.messagesData,
-        newMessageBody: state.dialogsReducer.newMessageBody,
+        dialogs: state.dialogsPage.dialogs,
+        messagesData: state.dialogsPage.messagesData,
+        newMessageBody: state.dialogsPage.newMessageBody,
     }
 }
 
