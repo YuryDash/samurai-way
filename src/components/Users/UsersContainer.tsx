@@ -6,7 +6,10 @@ import {UsersCo} from "./UsersCo";
 
 const mapStateToProps = (state: RootStateType) => {
     return {
-        users: state.usersPage.users
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage
     }
 }
 
