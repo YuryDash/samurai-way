@@ -1,7 +1,7 @@
 import React from "react";
-import {UserType} from "../../redux/users-reducer";
-import s from "./Users.module.css"
+import s from "./Users.module.css";
 import axios from "axios";
+import {UserType} from "../../redux/users-reducer";
 
 type PropsType = {
     users: UserType[]
@@ -10,28 +10,20 @@ type PropsType = {
     setNewUsers: (users: UserType[])=> void
 }
 
-export const Users = (props: PropsType) => {
-    // const users = useSelector<RootStateType, UserType[]>(state => state.usersPage.users)
+export class UsersCo extends React.Component <PropsType, UserType[]>{
+// на безе классовой компоненты создается обьект и взаимодействую дальше с этим обьектом
+     constructor(props: PropsType) {
+         super(props);
+             axios.get("https://social-network.samuraijs.com/api/1.0/users").then((response) => {
+                 this.props.setNewUsers(response.data.items.slice(0,5))
+             })
+     }
 
-   if(props.users.length === 0){
+render() {
 
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then((response) => {
+    const mappedUsers = this.props.users.map(el => {
 
-            props.setNewUsers(response.data.items)
-            return console.log('lol')
-        })
-    }
-
-    // if (props.users.length === 0) {
-    //     props.setNewUsers(   [
-    //         {id: v1(), followed: true, fullName: "Snickers", status: "I'm a boss", location: {city: "Minsk", country: "Belarus"}},
-    //         {id: v1(), followed: true, fullName: "Hottabych", status: "I'm a boss", location: {city: "Minsk", country: "Cyprus"}},
-    //         {id: v1(), followed: false, fullName: "Saske", status: "I'm a boss", location: {city: "Minsk", country: "Tbilisi"}},
-    //         {id: v1(), followed: true, fullName: "ALADDIN-BLEEET", status: "I'm a boss", location: {city: "Minsk", country: "KNDR"}},
-    //     ])
-    // }
-
-    const mappedUsers = props.users.map(el => {
+        console.log('Маппед функ')
         return (
             <div className={s.user}
                  key={el.id}
@@ -39,6 +31,7 @@ export const Users = (props: PropsType) => {
                      display: "flex",
                      margin: "20px"
                  }}>
+
                 <div className={s.user__but_img} style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -66,13 +59,13 @@ export const Users = (props: PropsType) => {
 
                     {
                         el.followed
-                        ? <button onClick={()=> props.unFollowUser(el.id)}
-                                  style={
-                            {backgroundColor: 'orangered',transitionDuration:"0.5s"}
-                        }>UNFOLLOW</button>
+                            ? <button onClick={()=> this.props.unFollowUser(el.id)}
+                                      style={
+                                          {backgroundColor: 'orangered',transitionDuration:"0.5s"}
+                                      }>UNFOLLOW</button>
 
-                        : <button onClick={()=> props.followUser(el.id)}
-                                  style={{backgroundColor: 'yellowgreen',transitionDuration:"0.5s"}}>FOLLOW</button>
+                            : <button onClick={()=> this.props.followUser(el.id)}
+                                      style={{backgroundColor: 'yellowgreen',transitionDuration:"0.5s"}}>FOLLOW</button>
                     }
 
                 </div>
@@ -90,10 +83,10 @@ export const Users = (props: PropsType) => {
 
                     <div className={s.user__description}
                          style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between'
-                    }}>
+                             display: 'flex',
+                             flexDirection: 'column',
+                             justifyContent: 'space-between'
+                         }}>
                         <div className={s.user__name}>{el.name}</div>
                         <div className={s.user__status}>{el.status}</div>
                     </div>
@@ -116,4 +109,6 @@ export const Users = (props: PropsType) => {
             <button>Show more</button>
         </div>
     )
+}
+
 }
