@@ -1,5 +1,3 @@
-import {v1} from "uuid";
-
 export type FollowAT = ReturnType<typeof followAC>
 export type UnFollowAT = ReturnType<typeof unFollowAC>
 export type setNewUsersAT = ReturnType<typeof setNewUsersAC>
@@ -8,15 +6,17 @@ type UsersStateType = {
     users: UserType[]
 }
 export type UserType = {
-    id: string
-    followed: boolean
     name: string
-    status: string
-    location: {
-        city: string
-        country: string
+    id: number
+    followed: boolean
+    uniqueUrlName: string | null
+    "photos": {
+        small: null | string,
+        large: null | string
     }
+    "status": null,
 }
+
 const initialState: UsersStateType = {
     users: [
         // {id: v1(), followed: true, fullName: "Snickers", status: "I'm a boss", location: {city: "Minsk", country: "Belarus"}},
@@ -46,7 +46,7 @@ export const usersReducer = (state = initialState, action: UsersActionType): Use
     }
 }
 
-export const followAC = (userID: string) => {
+export const followAC = (userID: number) => {
    return {
         type:"FOLLOW",
        payload: {
@@ -55,7 +55,7 @@ export const followAC = (userID: string) => {
     } as const
 }
 
-export const unFollowAC = (userID: string) => {
+export const unFollowAC = (userID: number) => {
     return {
         type:"UNFOLLOW",
         payload: {

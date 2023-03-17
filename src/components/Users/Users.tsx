@@ -5,19 +5,22 @@ import axios from "axios";
 
 type PropsType = {
     users: UserType[]
-    followUser: (userID:string) => void
-    unFollowUser: (userID:string) => void
-    setNewUsers: (users: any)=> void
+    followUser: (userID:number) => void
+    unFollowUser: (userID:number) => void
+    setNewUsers: (users: UserType[])=> void
 }
 
 export const Users = (props: PropsType) => {
     // const users = useSelector<RootStateType, UserType[]>(state => state.usersPage.users)
 
-    axios.get("https://social-network.samuraijs.com/api/1.0/users").then((response) => {
+   if(props.users.length === 0){
 
-        props.setNewUsers( response.data.items)
-        return console.log('lol')
-    } )
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then((response) => {
+
+            props.setNewUsers(response.data.items)
+            return console.log('lol')
+        })
+    }
 
     // if (props.users.length === 0) {
     //     props.setNewUsers(   [
@@ -51,6 +54,7 @@ export const Users = (props: PropsType) => {
                         overflow: 'hidden',
                         marginBottom: '10px'
                     }}>
+                        {}
                         <img style={{
                             width: '156px'
                         }}
@@ -84,7 +88,8 @@ export const Users = (props: PropsType) => {
                          justifyContent: 'space-between'
                      }}>
 
-                    <div className={s.user__description} style={{
+                    <div className={s.user__description}
+                         style={{
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between'
