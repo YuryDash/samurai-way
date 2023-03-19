@@ -22,7 +22,6 @@ const initialState: DialogsDataType = {
     ],
     newMessageBody: ''
 }
-
 export const dialogsReducer = (state: DialogsDataType = initialState, action: ActionType): DialogsDataType => {
 
     switch (action.type) {
@@ -38,8 +37,6 @@ export const dialogsReducer = (state: DialogsDataType = initialState, action: Ac
             return state;
     }
 }
-
-
 export const updateNewMessageBodyAC = (body: string) => {
     return {
         type: "UPDATE_NEW_MESSAGE_BODY",
@@ -48,7 +45,6 @@ export const updateNewMessageBodyAC = (body: string) => {
         }
     } as const
 }
-
 export const sendMessageAC = (body: string) => {
     return {type: "SEND_MESSAGE", payload:{body}} as const
 }
