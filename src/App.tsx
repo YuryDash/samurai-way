@@ -9,7 +9,7 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {store} from "./redux/store-redux";
-import {UsersContainer} from "./components/Users/UsersContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 const App = () => {
     return (
