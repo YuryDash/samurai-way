@@ -3,12 +3,14 @@ export type UnFollowAT = ReturnType<typeof unFollowAC>
 export type setNewUsersAT = ReturnType<typeof setNewUsersAC>
 export type setCurrentPageAT = ReturnType<typeof setCurrentPageAC>
 export type setTotalCountUsersAT = ReturnType<typeof setTotalCountUsersAC>
-export type UsersActionType = FollowAT | UnFollowAT | setNewUsersAT | setCurrentPageAT | setTotalCountUsersAT
+export type toggleIsFetchingAT = ReturnType<typeof toggleIsFetchingAC>
+export type UsersActionType = FollowAT | UnFollowAT | setNewUsersAT | setCurrentPageAT | setTotalCountUsersAT | toggleIsFetchingAT
 type UsersStateType = {
     users: UserType[]
-    pageSize: number,
+    pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 export type UserType = {
     name: string
@@ -25,13 +27,15 @@ export type UserType = {
 
 const initialState: UsersStateType = {
     users: [],
-    pageSize: 3,
+    pageSize: 10,
     totalUsersCount: 13,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 
 export const usersReducer = (state = initialState, action: UsersActionType): UsersStateType => {
     switch (action.type) {
+
         case"FOLLOW":
         return {...state,
             users: state.users.map( el => el.id === action.payload.userID ? {...el , followed: true} : el )
@@ -51,6 +55,9 @@ export const usersReducer = (state = initialState, action: UsersActionType): Use
 
         case "SET_TOTAL_COUNT":
             return {...state, totalUsersCount: action.payload.totalCount}
+
+        case "TOGGLE_IS_FETCHING":
+            return {...state, isFetching: action.payload.isFetching}
 
         default:
             return state
@@ -95,6 +102,14 @@ export const setTotalCountUsersAC = (totalCount: number) => {
         type:"SET_TOTAL_COUNT",
         payload: {
             totalCount
+        }
+    } as const
+}
+export const toggleIsFetchingAC = (isFetching: boolean) => {
+    return {
+        type:"TOGGLE_IS_FETCHING",
+        payload: {
+            isFetching
         }
     } as const
 }

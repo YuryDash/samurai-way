@@ -20,7 +20,7 @@ export const UsersCo = (props: PropsType) => {
         page.push(i)
     }
 
-    const mappedPage = page.map(el => {
+    const mappedPage = page.slice(0,5).map(el => {
         return <span
             key={el}
             onClick={() => {
