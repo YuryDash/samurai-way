@@ -27,7 +27,6 @@ export const dialogsReducer = (state: DialogsDataType = initialState, action: Ac
     switch (action.type) {
         case "SEND_MESSAGE":
             let newMessage: MessagesDataType = {id: v1(), message: action.payload.body}
-            console.log(newMessage.message)
             return {...state, messagesData: [...state.messagesData, newMessage], newMessageBody: ""}
 
         case "UPDATE_NEW_MESSAGE_BODY":

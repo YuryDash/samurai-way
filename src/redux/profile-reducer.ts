@@ -1,16 +1,47 @@
 import {v1} from "uuid";
-import {PostsDataType, PostsType} from "./store";
+import {PostsType} from "./store";
 
 type AddPostAT = ReturnType<typeof addPostAC>
 type UpdateNewPostAT = ReturnType<typeof updatePostAC>
-type ActionType = AddPostAT | UpdateNewPostAT
+type setUserProfileAT = ReturnType<typeof setUserProfileAC>
+type ActionType = AddPostAT | UpdateNewPostAT | setUserProfileAT
 
-const initialState: PostsDataType = {
-    posts: [{id: v1(), text: 'Starts'}],
-    newPostsText: ""
+export type ProfileUsers = {
+    "aboutMe": null | string
+    "contacts": {
+        "facebook": null | string
+        "website": null | string
+        "vk": null | string
+        "twitter": null | string
+        "instagram": null | string
+        "youtube": null | string
+        "github": null | string
+        "mainLink": null | string
+    },
+    "lookingForAJob": boolean
+    "lookingForAJobDescription": null | string
+    "fullName": null | string
+    "userId": number
+    "photos": {
+        "small": null | string
+        "large": null | string
+    }
 }
 
-export const profileReducer = (state: PostsDataType = initialState, action: ActionType): PostsDataType => {
+export type PostsDataType = {
+    posts: PostsType[]
+    newPostsText: string
+    profile: ProfileUsers | null
+}
+
+const initialState: PostsDataType = {
+
+    posts: [{id: v1(), text: 'Starts'}],
+    newPostsText: "",
+    profile: null
+
+}
+export const profileReducer = (state  = initialState, action: ActionType): PostsDataType => {
 
     switch (action.type) {
         case "ADD_POST":
@@ -19,6 +50,9 @@ export const profileReducer = (state: PostsDataType = initialState, action: Acti
 
         case "UPDATE_NEW_POST_TEXT":
             return {...state, newPostsText: action.payload.text}
+
+        case "SET_USER_PROFILE":
+            return {...state, profile: action.payload.profile}
 
         default:
             return state
@@ -39,6 +73,15 @@ export const updatePostAC = (text: string) => {
         type: "UPDATE_NEW_POST_TEXT",
         payload: {
             text
+        }
+    } as const
+}
+
+export const setUserProfileAC = (profile: ProfileUsers) => {
+    return {
+        type: "SET_USER_PROFILE",
+        payload: {
+            profile
         }
     } as const
 }

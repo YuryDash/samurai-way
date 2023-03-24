@@ -1,28 +1,38 @@
 
 .my__data {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+
 }
 
-.info{
+.info {
     padding-left: 40px;
     font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
 }
-.info div{
-color: #464646;
+
+.description {
+    margin-right: 270px;
+}
+
+.info div {
+    color: #464646;
     font-weight: 700;
 }
 
 
-.info span{
-  color: #464646;
+.info span {
+    color: #464646;
     font-weight: 500;
 }
 
 
 .avatar {
     overflow: hidden;
-width: 250px;
+    width: 250px;
     height: 250px;
     border-radius: 50%;
 }

@@ -1,18 +1,18 @@
 import {connect} from "react-redux";
 import {RootStateType} from "../../redux/store-redux";
-import {Dispatch} from "redux";
 import {
     followAC,
     setCurrentPageAC,
     setNewUsersAC,
-    setTotalCountUsersAC, toggleIsFetchingAC,
+    setTotalCountUsersAC,
+    toggleIsFetchingAC,
     unFollowAC,
     UserType
 } from "../../redux/users-reducer";
 import {UsersCo} from "./UsersCo";
 import React from "react";
 import axios from "axios";
-import preloader from "../../assets/XOsX.gif"
+import {Preloader} from "../../common/preloader/Preloader";
 
 type PropsType = {
     users: UserType[]
@@ -31,24 +31,21 @@ type PropsType = {
 class UsersContainer extends React.Component <PropsType, UserType[]> {
 // на безе классовой компоненты создается обьект и взаимодействую дальше с этим обьектом
     componentDidMount() {
-        console.log('1111111')
         this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}
         &count=${this.props.pageSize}`).then((response) => {
             this.props.setNewUsers(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
             this.props.toggleIsFetching(false)
-
         })
     }
 
     onPageChanged = (pageNumber: number) => {
-        console.log('1111111')
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then((response) => {
             this.props.setNewUsers(response.data.items)
-                this.props.toggleIsFetching(false)
+            this.props.toggleIsFetching(false)
         })
     }
 
@@ -56,9 +53,7 @@ class UsersContainer extends React.Component <PropsType, UserType[]> {
         return (
             <>
                 {this.props.isFetching
-                    ? <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                        <img src={preloader} alt={'lol'}/>
-                    </div>
+                    ? <Preloader/>
                     : <UsersCo
                         users={this.props.users}
                         onPageChanged={this.onPageChanged}
@@ -68,7 +63,6 @@ class UsersContainer extends React.Component <PropsType, UserType[]> {
                         totalUsersCount={this.props.totalUsersCount}
                         currentPage={this.props.currentPage}
                     />}
-
             </>
         )
     }
@@ -81,10 +75,11 @@ const mapStateToProps = (state: RootStateType) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching
+
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+{/*const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         followUser: (userID: number) => {
             dispatch(followAC(userID))
@@ -105,6 +100,13 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
             dispatch(toggleIsFetchingAC(toggleValue))
         },
     }
-}
+}*/}
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default connect(mapStateToProps, {
+    followUser: followAC,
+    unFollowUser: unFollowAC,
+    setNewUsers: setNewUsersAC,
+    setCurrentPage: setCurrentPageAC,
+    setTotalUsersCount: setTotalCountUsersAC,
+    toggleIsFetching: toggleIsFetchingAC,
+})(UsersContainer)
