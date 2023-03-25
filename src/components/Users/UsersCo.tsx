@@ -84,7 +84,6 @@ export const UsersCo = (props: PropsType) => {
                 {mappedPage}
             </div>
             {mappedUsers}
-            <button>Show more</button>
         </div>
     )
 }

@@ -6,42 +6,62 @@ type UpdateNewPostAT = ReturnType<typeof updatePostAC>
 type setUserProfileAT = ReturnType<typeof setUserProfileAC>
 type ActionType = AddPostAT | UpdateNewPostAT | setUserProfileAT
 
-export type ProfileUsers = {
-    "aboutMe": null | string
+export type ProfileUsersType = {
+    "aboutMe":  string
     "contacts": {
-        "facebook": null | string
-        "website": null | string
-        "vk": null | string
-        "twitter": null | string
-        "instagram": null | string
-        "youtube": null | string
-        "github": null | string
-        "mainLink": null | string
+        "facebook":  string
+        "website":  string
+        "vk":  string
+        "twitter":  string
+        "instagram":  string
+        "youtube":  string
+        "github":  string
+        "mainLink":  string
     },
     "lookingForAJob": boolean
-    "lookingForAJobDescription": null | string
-    "fullName": null | string
+    "lookingForAJobDescription":  string
+    "fullName":  string
     "userId": number
     "photos": {
-        "small": null | string
-        "large": null | string
+        "small":  string
+        "large":  string
     }
 }
 
 export type PostsDataType = {
     posts: PostsType[]
     newPostsText: string
-    profile: ProfileUsers | null
+    profile: ProfileUsersType
 }
 
 const initialState: PostsDataType = {
 
     posts: [{id: v1(), text: 'Starts'}],
     newPostsText: "",
-    profile: null
+    profile: {
+        "aboutMe": 'esadsad',
+        "contacts": {
+            "facebook": 'asdasd',
+            "website": 'asdsad',
+            "vk": 'sadsdfasdf',
+            "twitter": 'sadfasdf',
+            "instagram": 'sdfasdf',
+            "youtube": 'asdfsadfasdf',
+            "github": 'asfdasdf',
+            "mainLink": 'asdfasdf',
+        },
+        "lookingForAJob": true,
+        "lookingForAJobDescription": 'asdfasdf',
+        "fullName": 'fsadfasdf',
+        "userId":3,
+        "photos": {
+            "small": 'asdfasdfasdf',
+            "large": 'sadfsadf',
+        }
+    }
 
 }
-export const profileReducer = (state  = initialState, action: ActionType): PostsDataType => {
+export const profileReducer = (state = initialState, action: ActionType): PostsDataType => {
 
     switch (action.type) {
         case "ADD_POST":
@@ -77,7 +97,7 @@ export const updatePostAC = (text: string) => {
     } as const
 }
 
-export const setUserProfileAC = (profile: ProfileUsers) => {
+export const setUserProfileAC = (profile: ProfileUsersType) => {
     return {
         type: "SET_USER_PROFILE",
         payload: {

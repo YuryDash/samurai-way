@@ -9,7 +9,7 @@ import {News} from "./components/News/News";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {store} from "./redux/store-redux";
 import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from './components/Profile/ProfileContainer';
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 const App = () => {
     return (
@@ -18,7 +18,7 @@ const App = () => {
             <NavBar friendsName={store.getState().dialogsPage.dialogs}/>
             <div className="app-wrapper-content">
                 <Routes>
-                    <Route path='/profile' element={ <ProfileContainer />}/>
+                    <Route path='/profile' element={ <ProfileContainer/>}/>
                     <Route path='/dialogs' element={ <DialogsContainer />}/>
                     <Route path='/users' element={ <UsersContainer/> }/>
                     <Route path='/news' element={<News/>}/>

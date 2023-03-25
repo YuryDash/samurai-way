@@ -23,6 +23,7 @@ export type AppPropsType = {
     postsData: PostsDataType
     dialogsData: DialogsDataType
 }
+
 // export type StoreType = {
 //     _state: AppPropsType
 //     _callSubscriber: (state: AppPropsType) => void
