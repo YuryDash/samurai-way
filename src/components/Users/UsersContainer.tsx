@@ -28,12 +28,15 @@ type PropsType = {
     toggleIsFetching: (toggleValue: boolean) => void
 }
 
-class UsersContainer extends React.Component <PropsType, UserType[]> {
+
+
+ export class UsersContainer extends React.Component <PropsType, UserType[]> {
 // на безе классовой компоненты создается обьект и взаимодействую дальше с этим обьектом
     componentDidMount() {
         this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}
         &count=${this.props.pageSize}`).then((response) => {
+
             this.props.setNewUsers(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
             this.props.toggleIsFetching(false)
@@ -43,9 +46,13 @@ class UsersContainer extends React.Component <PropsType, UserType[]> {
     onPageChanged = (pageNumber: number) => {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then((response) => {
+
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}
+        &count=${this.props.pageSize}`).then((response) => {
+
             this.props.setNewUsers(response.data.items)
             this.props.toggleIsFetching(false)
+
         })
     }
 
@@ -102,7 +109,7 @@ const mapStateToProps = (state: RootStateType) => {
     }
 }*/}
 
-export default connect(mapStateToProps, {
+export let UserContainerConnect =  connect(mapStateToProps, {
     followUser: followAC,
     unFollowUser: unFollowAC,
     setNewUsers: setNewUsersAC,

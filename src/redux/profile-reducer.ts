@@ -31,36 +31,18 @@ export type ProfileUsersType = {
 export type PostsDataType = {
     posts: PostsType[]
     newPostsText: string
-    profile: ProfileUsersType
+    profile: ProfileUsersType | null
 }
 
 const initialState: PostsDataType = {
 
     posts: [{id: v1(), text: 'Starts'}],
     newPostsText: "",
-    profile: {
-        "aboutMe": 'esadsad',
-        "contacts": {
-            "facebook": 'asdasd',
-            "website": 'asdsad',
-            "vk": 'sadsdfasdf',
-            "twitter": 'sadfasdf',
-            "instagram": 'sdfasdf',
-            "youtube": 'asdfsadfasdf',
-            "github": 'asfdasdf',
-            "mainLink": 'asdfasdf',
-        },
-        "lookingForAJob": true,
-        "lookingForAJobDescription": 'asdfasdf',
-        "fullName": 'fsadfasdf',
-        "userId":3,
-        "photos": {
-            "small": 'asdfasdfasdf',
-            "large": 'sadfsadf',
-        }
-    }
+    profile: null
 
 }
+
+// profile && profile.
 export const profileReducer = (state = initialState, action: ActionType): PostsDataType => {
 
     switch (action.type) {
@@ -98,6 +80,7 @@ export const updatePostAC = (text: string) => {
 }
 
 export const setUserProfileAC = (profile: ProfileUsersType) => {
+    console.log(profile)
     return {
         type: "SET_USER_PROFILE",
         payload: {

@@ -38,24 +38,26 @@ export const MyPosts = (props: PropsType) => {
     const mapPostsData = props.posts.map((el: any) => <Posts key={el.id} message={el.text} id={el.id}/>)
 
     return (
-        <div className={s.my__post}>
-            <div className={s.newPostTitle}>NEW POST</div>
-            <div className={s.newPost}>
-                <input
-                    maxLength={60}
-                    value={props.newPostText}
-                    onChange={onPostChangeHandler}
-                    onKeyDown={OnKeyDownHandler}
-                    className={s.inputArea}
-                    placeholder={'My Posts'}
-                    id="1">
-                </input>
-                <Buttons name={'Add Posts'} callBack={onClickHandler}/>
+        <>
+            <div className={s.my__post}>
+                <div className={s.newPostTitle}>NEW POST</div>
+                <div className={s.newPost}>
+                    <input
+                        maxLength={60}
+                        value={props.newPostText}
+                        onChange={onPostChangeHandler}
+                        onKeyDown={OnKeyDownHandler}
+                        className={s.inputArea}
+                        placeholder={'My Posts'}
+                        id="1">
+                    </input>
+                    <Buttons name={'Add Posts'} callBack={onClickHandler}/>
+                </div>
+                <div>
+                    {mapPostsData}
+                </div>
             </div>
-            <div>
-                {mapPostsData}
-            </div>
-        </div>
+        </>
     );
 }
 
