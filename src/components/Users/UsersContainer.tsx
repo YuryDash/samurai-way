@@ -9,7 +9,7 @@ import {
     unFollowAC,
     UserType
 } from "../../redux/users-reducer";
-import {UsersCo} from "./UsersCo";
+import {Users} from "./Users";
 import React from "react";
 import axios from "axios";
 import {Preloader} from "../../common/preloader/Preloader";
@@ -35,7 +35,7 @@ type PropsType = {
     componentDidMount() {
         this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}
-        &count=${this.props.pageSize}`).then((response) => {
+        &count=${this.props.pageSize}`, {withCredentials: true}).then((response) => {
 
             this.props.setNewUsers(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
@@ -48,7 +48,7 @@ type PropsType = {
         this.props.setCurrentPage(pageNumber)
 
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}
-        &count=${this.props.pageSize}`).then((response) => {
+        &count=${this.props.pageSize}`, {withCredentials: true}).then((response) => {
 
             this.props.setNewUsers(response.data.items)
             this.props.toggleIsFetching(false)
@@ -61,7 +61,7 @@ type PropsType = {
             <>
                 {this.props.isFetching
                     ? <Preloader/>
-                    : <UsersCo
+                    : <Users
                         users={this.props.users}
                         onPageChanged={this.onPageChanged}
                         followUser={this.props.followUser}
@@ -108,7 +108,7 @@ const mapStateToProps = (state: RootStateType) => {
         },
     }
 }*/}
-
+// connect создает колбэк followUser которая вызывает ActionCreator
 export let UserContainerConnect =  connect(mapStateToProps, {
     followUser: followAC,
     unFollowUser: unFollowAC,

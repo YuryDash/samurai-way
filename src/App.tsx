@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./components/Header/Header";
 import {NavBar} from "./components/NavBar/NavBar";
 import {Route} from "react-router-dom";
 import {Settings} from "./components/Settings/Settings";
@@ -8,16 +7,17 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {store} from "./redux/store-redux";
-import {Lol} from "./components/Profile/ProfileContainer";
+import {ProfileContainerWrapper} from "./components/Profile/ProfileContainer";
 import {UserContainerConnect} from "./components/Users/UsersContainer";
+import {ConnectHeader} from "./components/Header/HeaderContainer";
 
 const App = () => {
     return (
         <div className='app-wrapper'>
-            <Header/>
+            <ConnectHeader/>
             <NavBar friendsName={store.getState().dialogsPage.dialogs}/>
             <div className="app-wrapper-content">
-                <Route path='/profile/:userID?' render={() => <Lol/>}/>
+                <Route path='/profile/:userID?' render={() => <ProfileContainerWrapper/>}/>
                 <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                 <Route path='/users' render={() => <UserContainerConnect />}/>
                 <Route path='/news' render={() => <News/>}/>

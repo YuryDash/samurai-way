@@ -10,10 +10,11 @@
     font-weight: 700;
     font-size: 22px;
     text-decoration: none;
+    text-shadow: none;
 }
 .item a.active{
     color: #040404;
-    text-shadow: 0px 0px 3px gold;
+    text-shadow: 0 0 3px yellow;
     text-decoration: underline;
     font-size: 25px;
 }
@@ -50,4 +51,6 @@
     color: #C7C7C7;
     font-weight: bold;
     font-size: 22px;
+    box-shadow: none;
+    text-decoration: none;
 }

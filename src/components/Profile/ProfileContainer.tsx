@@ -28,7 +28,7 @@ type OwnPropsType = RouteComponentProps<PathParamsType> & any
         let userID = this.props.match.params.userID
 
         if(!userID){
-            userID = 2
+            userID = 28543
         }
 
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userID ).then((response) => {
@@ -53,5 +53,5 @@ const mapStateToProps = (state: RootStateType) => {
 }
 
 export const WithUrlDataContainer = withRouter(ProfileContainer)
-export const Lol = connect(mapStateToProps, {setUserProfile:setUserProfileAC})(WithUrlDataContainer)
+export const ProfileContainerWrapper = connect(mapStateToProps, {setUserProfile:setUserProfileAC})(WithUrlDataContainer)
 

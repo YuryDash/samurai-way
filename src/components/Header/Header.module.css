@@ -21,8 +21,13 @@
     max-width: 56px;
 }
 
-.header div:hover {
-    color: red;
-    transition-duration: 1000ms;
-    cursor: pointer;
+/*.header div:hover {*/
+/*    color: red;*/
+/*    transition-duration: 1000ms;*/
+/*    cursor: pointer;*/
+/*}*/
+header a{
+    color: #464646;
+    text-decoration: none;
+    text-shadow: 1px 1px 10px  yellow;
 }

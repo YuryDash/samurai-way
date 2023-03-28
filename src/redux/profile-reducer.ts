@@ -80,7 +80,6 @@ export const updatePostAC = (text: string) => {
 }
 
 export const setUserProfileAC = (profile: ProfileUsersType) => {
-    console.log(profile)
     return {
         type: "SET_USER_PROFILE",
         payload: {
