@@ -11,8 +11,8 @@ import {
 } from "../../redux/users-reducer";
 import {Users} from "./Users";
 import React from "react";
-import axios from "axios";
 import {Preloader} from "../../common/preloader/Preloader";
+import {getUsers} from "../../api/api";
 
 type PropsType = {
     users: UserType[]
@@ -29,16 +29,15 @@ type PropsType = {
 }
 
 
-
- export class UsersContainer extends React.Component <PropsType, UserType[]> {
+export class UsersContainer extends React.Component <PropsType, UserType[]> {
 // на безе классовой компоненты создается обьект и взаимодействую дальше с этим обьектом
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}
-        &count=${this.props.pageSize}`, {withCredentials: true}).then((response) => {
 
-            this.props.setNewUsers(response.data.items)
-            this.props.setTotalUsersCount(response.data.totalCount)
+        //отделили DAL от UI и вынесли в отдельный файл
+        getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
+            this.props.setNewUsers(data.items)
+            this.props.setTotalUsersCount(data.totalCount)
             this.props.toggleIsFetching(false)
         })
     }
@@ -47,13 +46,19 @@ type PropsType = {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}
-        &count=${this.props.pageSize}`, {withCredentials: true}).then((response) => {
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}
+        // &count=${this.props.pageSize}`, {
+        //     withCredentials: true
+        // })
+        //отделили DAL от UI и вынесли в отдельный файл
 
-            this.props.setNewUsers(response.data.items)
-            this.props.toggleIsFetching(false)
+        getUsers(pageNumber, this.props.pageSize)
+            .then((data) => {
 
-        })
+                this.props.setNewUsers(data.items)
+                this.props.toggleIsFetching(false)
+
+            })
     }
 
     render() {
@@ -107,9 +112,10 @@ const mapStateToProps = (state: RootStateType) => {
             dispatch(toggleIsFetchingAC(toggleValue))
         },
     }
-}*/}
+}*/
+}
 // connect создает колбэк followUser которая вызывает ActionCreator
-export let UserContainerConnect =  connect(mapStateToProps, {
+export let UserContainerConnect = connect(mapStateToProps, {
     followUser: followAC,
     unFollowUser: unFollowAC,
     setNewUsers: setNewUsersAC,
