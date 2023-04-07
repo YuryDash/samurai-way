@@ -23,8 +23,8 @@ const App = () => {
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
-                {/*<Route path='/*' render={() => <div><h1>PAGE NOT FOUND (Error code: 404)</h1></div>}/>*/}
-                {/*<Route path='/' render={() => <div><h1>hello my friend</h1></div>}/>*/}
+                {/*<Route path='/*' element={() => <div><h1>PAGE NOT FOUND (Error code: 404)</h1></div>}/>*/}
+                {/*<Route path='/' element={() => <div><h1>hello my friend</h1></div>}/>*/}
             </div>
         </div>
     );

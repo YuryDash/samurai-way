@@ -12,7 +12,7 @@ import {
 import {Users} from "./Users";
 import React from "react";
 import {Preloader} from "../../common/preloader/Preloader";
-import {getUsers} from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 type PropsType = {
     users: UserType[]
@@ -35,7 +35,7 @@ export class UsersContainer extends React.Component <PropsType, UserType[]> {
         this.props.toggleIsFetching(true)
 
         //отделили DAL от UI и вынесли в отдельный файл
-        getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
             this.props.setNewUsers(data.items)
             this.props.setTotalUsersCount(data.totalCount)
             this.props.toggleIsFetching(false)
@@ -52,12 +52,10 @@ export class UsersContainer extends React.Component <PropsType, UserType[]> {
         // })
         //отделили DAL от UI и вынесли в отдельный файл
 
-        getUsers(pageNumber, this.props.pageSize)
+        usersAPI.getUsers(pageNumber, this.props.pageSize)
             .then((data) => {
-
                 this.props.setNewUsers(data.items)
                 this.props.toggleIsFetching(false)
-
             })
     }
 

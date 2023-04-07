@@ -2,7 +2,7 @@ import React from "react";
 import s from "./Users.module.css";
 import {UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 type PropsType = {
     users: UserType[]
@@ -52,18 +52,25 @@ export const Users = (props: PropsType) => {
                         el.followed
                             ? <button onClick={() => {
 
-                                //withCredentials передается ВТОРЫМ параметром в delete!!! В post третьим!
-                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
-                                    {
-                                        withCredentials: true,
-                                        headers: {
-                                           'API-KEY': '5c459c90-c1a8-4f52-af57-db2b0c2fbb33'
-                                        }
-                                    }).then((response) => {
-                                        if(response.data.resultCode === 0) {
-                                            props.unFollowUser(el.id)
-                                        }
+                                usersAPI.userUnfollow(el.id).then((response) => {
+                                    if (response.data.resultCode === 0) {
+                                        props.unFollowUser(el.id)
+                                    }
                                 })
+
+
+                                //withCredentials передается ВТОРЫМ параметром в delete!!! В post третьим!
+                                // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
+                                //     {
+                                //         withCredentials: true,
+                                //         headers: {
+                                //            'API-KEY': '5c459c90-c1a8-4f52-af57-db2b0c2fbb33'
+                                //         }
+                                //     }).then((response) => {
+                                //         if(response.data.resultCode === 0) {
+                                //             props.unFollowUser(el.id)
+                                //         }
+                                // })
                             }}
                                       style={
                                           {backgroundColor: 'orangered', transitionDuration: "0.5s"}
@@ -71,18 +78,25 @@ export const Users = (props: PropsType) => {
 
                             : <button onClick={() => {
 
-                                //withCredentials передается третьим параметром в post!!! В get вторым!
-                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
-                                    {}, {
-                                    withCredentials: true,
-                                        headers: {
-                                            'API-KEY': '5c459c90-c1a8-4f52-af57-db2b0c2fbb33'
-                                        }
-                                    }).then((response) => {
-                                    if(response.data.resultCode === 0) {
+
+                                usersAPI.userFollow(el.id).then((response) => {
+                                    if (response.data.resultCode === 0) {
                                         props.followUser(el.id)
                                     }
                                 })
+
+                                // withCredentials передается третьим параметром в post!!! В get вторым!
+                                // axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
+                                //     {}, {
+                                //     withCredentials: true,
+                                //         // headers: {
+                                //         //     'API-KEY': '5c459c90-c1a8-4f52-af57-db2b0c2fbb33'
+                                //         // }
+                                //     }).then((response) => {
+                                //     if(response.data.resultCode === 0) {
+                                //         props.followUser(el.id)
+                                //     }
+                                // })
 
                             }}
                                       style={{

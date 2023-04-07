@@ -24,7 +24,6 @@ export type UserType = {
     "status": null,
     totalCount: number,
 }
-
 const initialState: UsersStateType = {
     users: [],
     pageSize: 10,
