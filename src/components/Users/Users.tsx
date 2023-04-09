@@ -12,12 +12,12 @@ type PropsType = {
     totalUsersCount: number
     currentPage: number
     onPageChanged: (pageNumber: number) => void
-    toggleIsFollowingProgress: (toggleBoo: boolean) => void
-    BooValueForButtonsDisabled: boolean
+    toggleIsFollowingProgress: (toggleBoo: boolean, userID: number) => void
+    isFetching: boolean
+    followingInProgress: number[]
 }
 
 export const Users = (props: PropsType) => {
-    console.log(props.BooValueForButtonsDisabled)
     let page = []
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
     for (let i = 1; i <= pageCount; i++) {
@@ -37,29 +37,24 @@ export const Users = (props: PropsType) => {
     const mappedUsers = props.users.map(el => {
 
         const onClickButtonUnfollowHandler = () => {
-            props.toggleIsFollowingProgress(true)
+            props.toggleIsFollowingProgress(true, el.id)
             usersAPI.userUnfollow(el.id).then((response) => {
                 if (response.data.resultCode === 0) {
                     props.unFollowUser(el.id)
                 }
-                props.toggleIsFollowingProgress(false)
+                props.toggleIsFollowingProgress(false , el.id)
             })
         }
 
         const onClickButtonFollowHandler = () => {
-
-            props.toggleIsFollowingProgress(true)
-
+            props.toggleIsFollowingProgress(true, el.id)
             usersAPI.userFollow(el.id).then((response) => {
-
                 if (response.data.resultCode === 0) {
                     props.followUser(el.id)
                 }
-
-                props.toggleIsFollowingProgress(false)
+                props.toggleIsFollowingProgress(false, el.id)
             })
         }
-
         return (
             <div className={s.user} key={el.id}>
                 <div className={s.user__but_img}>
@@ -77,7 +72,7 @@ export const Users = (props: PropsType) => {
                                   style={
                                       {backgroundColor: 'orangered', transitionDuration: "0.5s"}
                                   }
-                                  disabled={props.BooValueForButtonsDisabled}
+                                  disabled={props.followingInProgress.some( id => id === el.id)}
                         >UNFOLLOW</button>
 
                         : <button onClick={onClickButtonFollowHandler}
@@ -85,7 +80,7 @@ export const Users = (props: PropsType) => {
                                       backgroundColor: 'yellowgreen',
                                       transitionDuration: "0.5s"
                                   }}
-                                  disabled={props.BooValueForButtonsDisabled}
+                                  disabled={props.followingInProgress.some( id => id === el.id)}
                         >FOLLOW</button>
                     }
 

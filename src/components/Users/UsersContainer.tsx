@@ -26,8 +26,8 @@ type PropsType = {
     setTotalUsersCount: (totalCount: number) => void
     isFetching: boolean
     toggleIsFetching: (toggleValue: boolean) => void
-    toggleIsFollowingProgress: (toggleBoo: boolean) => void
-    BooValueForButtonsDisabled: boolean
+    toggleIsFollowingProgress: (toggleBoo: boolean, userID: number) => void
+    followingInProgress: number[]
 }
 
 
@@ -75,7 +75,8 @@ export class UsersContainer extends React.Component <PropsType, UserType[]> {
                         totalUsersCount={this.props.totalUsersCount}
                         currentPage={this.props.currentPage}
                         toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
-                        BooValueForButtonsDisabled={this.props.BooValueForButtonsDisabled}
+                        isFetching={this.props.isFetching}
+                        followingInProgress={this.props.followingInProgress}
                     />}
             </>
         )
@@ -89,7 +90,7 @@ const mapStateToProps = (state: RootStateType) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        BooValueForButtonsDisabled: state.usersPage.followingInProgress
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 // connect создает колбэк followUser которая вызывает ActionCreator

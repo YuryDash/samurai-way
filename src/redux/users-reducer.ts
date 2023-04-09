@@ -20,7 +20,7 @@ type UsersStateType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
-    followingInProgress: boolean
+    followingInProgress: number[]
 
 }
 export type UserType = {
@@ -41,7 +41,7 @@ const initialState: UsersStateType = {
     totalUsersCount: 13,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: false,
+    followingInProgress: [],
 }
 
 export const usersReducer = (state = initialState, action: UsersActionType): UsersStateType => {
@@ -70,7 +70,12 @@ export const usersReducer = (state = initialState, action: UsersActionType): Use
             return {...state, isFetching: action.payload.isFetching}
 
         case "TOGGLE_IS_FOLLOWING_PROGRESS":
-            return {...state, followingInProgress: action.payload.isFetching}
+            return {
+                ...state,
+                followingInProgress: action.payload.isFetching
+                    ? [...state.followingInProgress, action.payload.userID]
+                    : state.followingInProgress.filter(el => el !== action.payload.userID)
+            }
 
         default:
             return state
@@ -131,11 +136,11 @@ export const toggleIsFetchingAC = (isFetching: boolean) => {
     } as const
 }
 
-export const toggleIsFollowingProgressAC = (isFetching: boolean) => {
+export const toggleIsFollowingProgressAC = (isFetching: boolean, userID: number) => {
     return {
         type: "TOGGLE_IS_FOLLOWING_PROGRESS",
         payload: {
-            isFetching
+            isFetching, userID
         }
     } as const
 }
