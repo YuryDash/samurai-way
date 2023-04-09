@@ -13,10 +13,11 @@ type PropsType = {
     currentPage: number
     onPageChanged: (pageNumber: number) => void
     toggleIsFollowingProgress: (toggleBoo: boolean) => void
+    BooValueForButtonsDisabled: boolean
 }
 
 export const Users = (props: PropsType) => {
-
+    console.log(props.BooValueForButtonsDisabled)
     let page = []
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
     for (let i = 1; i <= pageCount; i++) {
@@ -46,15 +47,17 @@ export const Users = (props: PropsType) => {
         }
 
         const onClickButtonFollowHandler = () => {
+
             props.toggleIsFollowingProgress(true)
 
             usersAPI.userFollow(el.id).then((response) => {
 
-                    if (response.data.resultCode === 0) {
-                        props.followUser(el.id)
-                    }
-                    props.toggleIsFollowingProgress(false)
-                })
+                if (response.data.resultCode === 0) {
+                    props.followUser(el.id)
+                }
+
+                props.toggleIsFollowingProgress(false)
+            })
         }
 
         return (
@@ -73,13 +76,17 @@ export const Users = (props: PropsType) => {
                         ? <button onClick={onClickButtonUnfollowHandler}
                                   style={
                                       {backgroundColor: 'orangered', transitionDuration: "0.5s"}
-                                  }>UNFOLLOW</button>
+                                  }
+                                  disabled={props.BooValueForButtonsDisabled}
+                        >UNFOLLOW</button>
 
                         : <button onClick={onClickButtonFollowHandler}
                                   style={{
                                       backgroundColor: 'yellowgreen',
                                       transitionDuration: "0.5s"
-                                  }}>FOLLOW</button>
+                                  }}
+                                  disabled={props.BooValueForButtonsDisabled}
+                        >FOLLOW</button>
                     }
 
                 </div>
