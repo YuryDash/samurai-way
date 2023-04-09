@@ -5,7 +5,7 @@ import {
     setCurrentPageAC,
     setNewUsersAC,
     setTotalCountUsersAC,
-    toggleIsFetchingAC,
+    toggleIsFetchingAC, toggleIsFollowingProgressAC,
     unFollowAC,
     UserType
 } from "../../redux/users-reducer";
@@ -26,11 +26,12 @@ type PropsType = {
     setTotalUsersCount: (totalCount: number) => void
     isFetching: boolean
     toggleIsFetching: (toggleValue: boolean) => void
+    toggleIsFollowingProgress: (toggleBoo: boolean) => void
 }
 
 
 export class UsersContainer extends React.Component <PropsType, UserType[]> {
-// на безе классовой компоненты создается обьект и взаимодействую дальше с этим обьектом
+// на безе классовой компоненты создается обьект и я взаимодействую дальше с этим обьектом
     componentDidMount() {
         this.props.toggleIsFetching(true)
 
@@ -72,6 +73,7 @@ export class UsersContainer extends React.Component <PropsType, UserType[]> {
                         pageSize={this.props.pageSize}
                         totalUsersCount={this.props.totalUsersCount}
                         currentPage={this.props.currentPage}
+                        toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
                     />}
             </>
         )
@@ -84,8 +86,8 @@ const mapStateToProps = (state: RootStateType) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
-
+        isFetching: state.usersPage.isFetching,
+        toggleIsFollowingProgress: state.usersPage.followingInProgress
     }
 }
 
@@ -120,4 +122,5 @@ export let UserContainerConnect = connect(mapStateToProps, {
     setCurrentPage: setCurrentPageAC,
     setTotalUsersCount: setTotalCountUsersAC,
     toggleIsFetching: toggleIsFetchingAC,
+    toggleIsFollowingProgress: toggleIsFollowingProgressAC,
 })(UsersContainer)
