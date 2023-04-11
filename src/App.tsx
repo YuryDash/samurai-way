@@ -19,7 +19,7 @@ const App = () => {
             <div className="app-wrapper-content">
                 <Route path='/profile/:userID?' render={() => <ProfileContainerWrapper/>}/>
                 <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                <Route path='/users' render={() => <UserContainerConnect />}/>
+                <Route path='/users' render={() => <UserContainerConnect/>}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>

@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
+
 export type FollowAT = ReturnType<typeof followAC>
 export type UnFollowAT = ReturnType<typeof unFollowAC>
 export type setNewUsersAT = ReturnType<typeof setNewUsersAC>
@@ -13,6 +16,7 @@ export type UsersActionType =
     | setTotalCountUsersAT
     | toggleIsFetchingAT
     | toggleIsFollowingProgressAT
+
 
 type UsersStateType = {
     users: UserType[]
@@ -143,4 +147,43 @@ export const toggleIsFollowingProgressAC = (isFetching: boolean, userID: number)
             isFetching, userID
         }
     } as const
+}
+
+
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+// безем значение КарентПэйдж иПэйджСайз из ЗАМЫКАНИЯ
+    return (dispatch: Dispatch) => {
+        dispatch(toggleIsFetchingAC(true))
+        //отделили DAL от UI и вынесли в отдельный файл
+        usersAPI.getUsers(currentPage, pageSize).then((data) => {
+            dispatch(setCurrentPageAC(currentPage))
+            dispatch(setNewUsersAC(data.items))
+            dispatch(setTotalCountUsersAC(data.totalCount))
+            dispatch(toggleIsFetchingAC(false))
+        })
+    }
+}
+export const followThunkCreator = (userID: number) => {
+// безем значение КарентПэйдж иПэйджСайз из ЗАМЫКАНИЯ
+    return (dispatch: Dispatch) => {
+        dispatch(toggleIsFollowingProgressAC(true, userID))
+        usersAPI.userFollow(userID).then((response) => {
+            if (response.data.resultCode === 0) {
+                dispatch(followAC(userID))
+            }
+            dispatch(toggleIsFollowingProgressAC(false, userID))
+        })
+    }
+}
+export const unFollowThunkCreator = (userID: number) => {
+// безем значение КарентПэйдж иПэйджСайз из ЗАМЫКАНИЯ
+    return (dispatch: Dispatch) => {
+       dispatch(toggleIsFollowingProgressAC(true, userID))
+        usersAPI.userUnfollow(userID).then((response) => {
+            if (response.data.resultCode === 0) {
+               dispatch(unFollowAC(userID))
+            }
+           dispatch(toggleIsFollowingProgressAC(false , userID))
+        })
+    }
 }

@@ -1,5 +1,7 @@
 import {v1} from "uuid";
 import {PostsType} from "./store";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 type AddPostAT = ReturnType<typeof addPostAC>
 type UpdateNewPostAT = ReturnType<typeof updatePostAC>
@@ -70,6 +72,15 @@ export const addPostAC = (text: string) => {
     } as const
 }
 
+export const setUserProfileAC = (profile: ProfileUsersType) => {
+    return {
+        type: "SET_USER_PROFILE",
+        payload: {
+            profile
+        }
+    } as const
+}
+
 export const updatePostAC = (text: string) => {
     return {
         type: "UPDATE_NEW_POST_TEXT",
@@ -79,11 +90,9 @@ export const updatePostAC = (text: string) => {
     } as const
 }
 
-export const setUserProfileAC = (profile: ProfileUsersType) => {
-    return {
-        type: "SET_USER_PROFILE",
-        payload: {
-            profile
-        }
-    } as const
+export const getUserProfile = (userID: number) => (dispatch: Dispatch) => {
+    usersAPI.getProfile(userID).then((response) => {
+        dispatch(setUserProfileAC(response.data))
+    })
 }
+

@@ -1,64 +1,36 @@
 import {connect} from "react-redux";
 import {RootStateType} from "../../redux/store-redux";
 import {
-    followAC,
+    followThunkCreator,
+    getUsersThunkCreator,
     setCurrentPageAC,
-    setNewUsersAC,
-    setTotalCountUsersAC,
-    toggleIsFetchingAC, toggleIsFollowingProgressAC,
-    unFollowAC,
+    unFollowThunkCreator,
     UserType
 } from "../../redux/users-reducer";
 import {Users} from "./Users";
 import React from "react";
 import {Preloader} from "../../common/preloader/Preloader";
-import {usersAPI} from "../../api/api";
 
 type PropsType = {
     users: UserType[]
-    followUser: (userID: number) => void
-    unFollowUser: (userID: number) => void
-    setNewUsers: (users: UserType[]) => void
+    followThunkCreator: (userID: number) => void
+    unFollowThunkCreator: (userID: number) => void
     pageSize: number
     totalUsersCount: number
     currentPage: number
     setCurrentPage: (currentPage: number) => void
-    setTotalUsersCount: (totalCount: number) => void
     isFetching: boolean
-    toggleIsFetching: (toggleValue: boolean) => void
-    toggleIsFollowingProgress: (toggleBoo: boolean, userID: number) => void
     followingInProgress: number[]
+    getUsers: ( currentPage: number, pageSize: number ) => void
 }
 
 
 export class UsersContainer extends React.Component <PropsType, UserType[]> {
-// на безе классовой компоненты создается обьект и взаимодействую дальше с этим обьектом
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-
-        //отделили DAL от UI и вынесли в отдельный файл
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
-            this.props.setNewUsers(data.items)
-            this.props.setTotalUsersCount(data.totalCount)
-            this.props.toggleIsFetching(false)
-        })
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
-
     onPageChanged = (pageNumber: number) => {
-        this.props.toggleIsFetching(true)
-        this.props.setCurrentPage(pageNumber)
-
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}
-        // &count=${this.props.pageSize}`, {
-        //     withCredentials: true
-        // })
-        //отделили DAL от UI и вынесли в отдельный файл
-
-        usersAPI.getUsers(pageNumber, this.props.pageSize)
-            .then((data) => {
-                this.props.setNewUsers(data.items)
-                this.props.toggleIsFetching(false)
-            })
+        this.props.getUsers(pageNumber, this.props.pageSize)
     }
 
     render() {
@@ -69,13 +41,11 @@ export class UsersContainer extends React.Component <PropsType, UserType[]> {
                     : <Users
                         users={this.props.users}
                         onPageChanged={this.onPageChanged}
-                        followUser={this.props.followUser}
-                        unFollowUser={this.props.unFollowUser}
+                        followThunkCreator={this.props.followThunkCreator}
+                        unFollowThunkCreator={this.props.unFollowThunkCreator}
                         pageSize={this.props.pageSize}
                         totalUsersCount={this.props.totalUsersCount}
                         currentPage={this.props.currentPage}
-                        toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
-                        isFetching={this.props.isFetching}
                         followingInProgress={this.props.followingInProgress}
                     />}
             </>
@@ -95,11 +65,8 @@ const mapStateToProps = (state: RootStateType) => {
 }
 // connect создает колбэк followUser которая вызывает ActionCreator
 export let UserContainerConnect = connect(mapStateToProps, {
-    followUser: followAC,
-    unFollowUser: unFollowAC,
-    setNewUsers: setNewUsersAC,
+    followThunkCreator: followThunkCreator,
+    unFollowThunkCreator: unFollowThunkCreator,
     setCurrentPage: setCurrentPageAC,
-    setTotalUsersCount: setTotalCountUsersAC,
-    toggleIsFetching: toggleIsFetchingAC,
-    toggleIsFollowingProgress: toggleIsFollowingProgressAC,
+    getUsers: getUsersThunkCreator
 })(UsersContainer)
