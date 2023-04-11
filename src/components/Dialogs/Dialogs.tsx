@@ -3,32 +3,38 @@ import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogsItem/DialogItem";
 import {DialogMessages} from "./DialogMessages/DialogMessages";
 import {DialogsType, MessagesDataType} from "../../redux/store";
+import {Redirect} from "react-router-dom";
 
 type DialogPropsType = {
 
-    dialogs:  DialogsType[]
+    dialogs: DialogsType[]
     messagesData: MessagesDataType[]
     newMessageBody: string
+    isAuth: boolean
 
     onSendMessageClickCo: (body: string) => void
     onNewMessageChangeCo: (textValue: string) => void
 
 }
+
 export function Dialogs(props: DialogPropsType) {
 
     let dialogElements = props.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id}/>)
-    // let dialogElements = props.dialogsData.dialogsReducer.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id}/>)
-    let messageElements = props.messagesData.map(el => <DialogMessages key={el.id} id={el.id}
-                                                                                   message={el.message}/>)
+    let messageElements = props.messagesData.map(el => <DialogMessages key={el.id} id={el.id} message={el.message}/>)
     const onSendMessageClick = () => {
-        if (props.newMessageBody.trim() !== ''){
+        if (props.newMessageBody.trim() !== '') {
             props.onSendMessageClickCo(props.newMessageBody)
         }
     }
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-         let textValue = e.currentTarget.value
+        let textValue = e.currentTarget.value
         props.onNewMessageChangeCo(textValue)
     }
+//this is Redirect for login
+    if(!props.isAuth) {
+        return <Redirect to={'/login'}/>
+    }
+
     return (
         <>
             <div className={s.dialogs}>

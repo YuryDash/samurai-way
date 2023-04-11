@@ -9,13 +9,16 @@ let mapStateToProps = (state: RootStateType) => {
         dialogs: state.dialogsPage.dialogs,
         messagesData: state.dialogsPage.messagesData,
         newMessageBody: state.dialogsPage.newMessageBody,
+        isAuth: state.auth.isAuth
     }
 }
 
 let mapDispatchToProps = (dispatch: Dispatch) => {
 
     return {
-        onSendMessageClickCo: (textValue: string) => {dispatch(sendMessageAC(textValue))},
+        onSendMessageClickCo: (textValue: string) => {
+            dispatch(sendMessageAC(textValue))
+        },
         onNewMessageChangeCo: (textValue: string) => {
             dispatch(updateNewMessageBodyAC(textValue))
         }

@@ -7,9 +7,10 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {store} from "./redux/store-redux";
-import {ProfileContainerWrapper} from "./components/Profile/ProfileContainer";
+import {ProfileConnectContainer} from "./components/Profile/ProfileContainer";
 import {UserContainerConnect} from "./components/Users/UsersContainer";
 import {ConnectHeader} from "./components/Header/HeaderContainer";
+import {Login} from "./components/Login/Login";
 
 const App = () => {
     return (
@@ -17,12 +18,14 @@ const App = () => {
             <ConnectHeader/>
             <NavBar friendsName={store.getState().dialogsPage.dialogs}/>
             <div className="app-wrapper-content">
-                <Route path='/profile/:userID?' render={() => <ProfileContainerWrapper/>}/>
+                <Route path='/profile/:userID?' render={() => <ProfileConnectContainer/>}/>
                 <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                 <Route path='/users' render={() => <UserContainerConnect/>}/>
+                <Route path='/login' render={() => <Login/>}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
+
                 {/*<Route path='/*' element={() => <div><h1>PAGE NOT FOUND (Error code: 404)</h1></div>}/>*/}
                 {/*<Route path='/' element={() => <div><h1>hello my friend</h1></div>}/>*/}
             </div>
