@@ -7,10 +7,10 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {store} from "./redux/store-redux";
-import {ProfileConnectContainer} from "./components/Profile/ProfileContainer";
 import {UserContainerConnect} from "./components/Users/UsersContainer";
 import {ConnectHeader} from "./components/Header/HeaderContainer";
 import {Login} from "./components/Login/Login";
+import ProfileContainer from './components/Profile/ProfileContainer';
 
 const App = () => {
     return (
@@ -18,7 +18,7 @@ const App = () => {
             <ConnectHeader/>
             <NavBar friendsName={store.getState().dialogsPage.dialogs}/>
             <div className="app-wrapper-content">
-                <Route path='/profile/:userID?' render={() => <ProfileConnectContainer/>}/>
+                <Route path='/profile/:userID?' render={() => <ProfileContainer/>}/>
                 <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                 <Route path='/users' render={() => <UserContainerConnect/>}/>
                 <Route path='/login' render={() => <Login/>}/>

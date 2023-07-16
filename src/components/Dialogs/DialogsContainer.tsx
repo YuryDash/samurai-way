@@ -31,4 +31,5 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
 
 // let AuthRedirectComponent = withAuthRedirect(Dialogs<TypeForThisFuckinCode>);
 // Первые скобки вызов коннект , а вторые вызов функции которую возвращает connect
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+const DialogWithAuthRedirect = withAuthRedirect(Dialogs)
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(DialogWithAuthRedirect);

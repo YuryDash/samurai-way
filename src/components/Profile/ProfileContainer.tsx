@@ -7,21 +7,34 @@ import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import { withAuthRedirect } from "../HOC/withAuthRedirect";
 
+// type PathParamsType = {
+//     userID: string
+// }
+// type MapStateToPropsType = {
+//     profileState:  ProfileUsersType | null
+//     getUserProfile: (userID: number) => void
+// }
+// type OwnPropsType = RouteComponentProps<PathParamsType> & MapStateToPropsType
+
 type PathParamsType = {
-    userID: string
+     userID: string
 }
-type PropsType = {
+type MapStateToPropsType = {
     profileState:  ProfileUsersType | null
+    isAuth: boolean
+}
+type MapDispatchToProps = {
     getUserProfile: (userID: number) => void
 }
-type OwnPropsType = RouteComponentProps<PathParamsType> & PropsType
+type OwnPropsType = MapStateToPropsType & MapDispatchToProps
+type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 
-  class ProfileContainer extends React.Component<OwnPropsType>  {
+  class ProfileContainer extends React.Component<ProfileContainerPropsType>  {
     componentDidMount() {
 
         let userID = this.props.match.params.userID
-        if(!userID){
+        if(!userID && this.props.profileState){
             userID = '28543'
         }
         this.props.getUserProfile(+userID)
@@ -33,7 +46,7 @@ type OwnPropsType = RouteComponentProps<PathParamsType> & PropsType
     // if(!this.props.isAuth) return <Redirect to={'/login'}/>
         return (
             <div className={s.my__data}>
-                <Profile profileState={this.props.profileState}/>
+                <Profile {...this.props} profileState={this.props.profileState}/>
             </div>
         )
     }
@@ -46,6 +59,7 @@ const mapStateToProps = (state: RootStateType) => {
     }
 }
 
-export const WithUrlDataContainer = withRouter(ProfileContainer)
-export const ProfileConnectContainer = withAuthRedirect(connect(mapStateToProps, {getUserProfile})(WithUrlDataContainer))
+const WithUrlDataContainer = withRouter(ProfileContainer)
+
+export default withAuthRedirect(connect(mapStateToProps, {getUserProfile})(WithUrlDataContainer))
 //withAuthRedirect
