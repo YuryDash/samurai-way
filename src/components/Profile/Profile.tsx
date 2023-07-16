@@ -5,11 +5,11 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileUsersType} from "../../redux/profile-reducer";
 
 type PropsType = {
-    profileState: ProfileUsersType
+    profileState: ProfileUsersType | null
 }
 
 export function Profile(props: PropsType) {
-
+debugger
     return (
         <div className={s.my__data}>
 

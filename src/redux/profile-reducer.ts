@@ -33,15 +33,13 @@ export type ProfileUsersType = {
 export type PostsDataType = {
     posts: PostsType[]
     newPostsText: string
-    profile: ProfileUsersType | null
+    profile:  ProfileUsersType
 }
 
 const initialState: PostsDataType = {
-
     posts: [{id: v1(), text: 'Starts'}],
     newPostsText: "",
-    profile: null
-
+    profile: {} as ProfileUsersType
 }
 
 // profile && profile.

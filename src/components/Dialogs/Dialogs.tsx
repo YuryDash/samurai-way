@@ -5,12 +5,12 @@ import {DialogMessages} from "./DialogMessages/DialogMessages";
 import {DialogsType, MessagesDataType} from "../../redux/store";
 import {Redirect} from "react-router-dom";
 
-type DialogPropsType = {
+export type DialogPropsType = {
 
     dialogs: DialogsType[]
     messagesData: MessagesDataType[]
     newMessageBody: string
-    isAuth: boolean
+    // isAuth: boolean
 
     onSendMessageClickCo: (body: string) => void
     onNewMessageChangeCo: (textValue: string) => void
@@ -31,9 +31,9 @@ export function Dialogs(props: DialogPropsType) {
         props.onNewMessageChangeCo(textValue)
     }
 //this is Redirect for login
-    if(!props.isAuth) {
-        return <Redirect to={'/login'}/>
-    }
+//     if(!props.isAuth) {
+//         return <Redirect to={'/login'}/>
+//     }
 
     return (
         <>

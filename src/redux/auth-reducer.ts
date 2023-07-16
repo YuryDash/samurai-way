@@ -33,9 +33,8 @@ export const setAuthUserDataAC = (id: string, login: string, email: string) => {
     } as const
 }
 
-export const authThunkCreator = () => {
-    debugger
-    return (dispatch: Dispatch) => {
+export const authThunkCreator = () => (dispatch: Dispatch) => {
+
         authAPI.userAuth()
             .then((response) => {
                 if (response.data.resultCode === 0) {
@@ -43,7 +42,6 @@ export const authThunkCreator = () => {
                     dispatch(setAuthUserDataAC(id, login, email))
                 }
             })
-    }
 }
 
 

@@ -3,7 +3,7 @@ import React from "react";
 import {ProfileUsersType} from "../../../redux/profile-reducer";
 
 type PropsInfoType = {
-    profileInfo: ProfileUsersType
+    profileInfo: ProfileUsersType | null
 }
 
 
@@ -14,7 +14,7 @@ export function UserInfo(props: PropsInfoType) {
         <div className={s.info}>
             <div className={s.avatar}>
                 {
-                   !props.profileInfo?.photos.small ? <img
+                   !props.profileInfo?.photos?.small ? <img
                     src={imageUrl}
                     //src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/escanor-of-pride-nanatsu-no-taizai-kitaru-normin.jpg"
                     alt="123123"/>
@@ -35,11 +35,11 @@ export function UserInfo(props: PropsInfoType) {
                     {/*<div>Education: <span> Auto Mechanical College</span></div>*/}
                     {/*<div>Web-site: <a href="src/components/Profile/Profile#">https://img2.joyreactor.cc</a></div>*/}
                     <h3>Contacts</h3>
-                    <div>Instagram: <span>{props.profileInfo?.contacts.instagram || 'not entered'} </span></div>
-                    <div>GitHub: <span>{props.profileInfo?.contacts.github || 'not entered' }</span></div>
-                    <div>Facebook: <span>{props.profileInfo?.contacts.facebook || 'not entered'}</span></div>
-                    <div> VK: <span>{props.profileInfo?.contacts.vk || 'not entered'}</span></div>
-                    <div>Twitter: <span>{props.profileInfo?.contacts.twitter || 'not entered'}</span></div>
+                    <div>Instagram: <span>{props.profileInfo?.contacts?.instagram || 'not entered'} </span></div>
+                    <div>GitHub: <span>{props.profileInfo?.contacts?.github || 'not entered' }</span></div>
+                    <div>Facebook: <span>{props.profileInfo?.contacts?.facebook || 'not entered'}</span></div>
+                    <div> VK: <span>{props.profileInfo?.contacts?.vk || 'not entered'}</span></div>
+                    <div>Twitter: <span>{props.profileInfo?.contacts?.twitter || 'not entered'}</span></div>
                 </div>
             </div>
         </div>
