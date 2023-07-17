@@ -1,18 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import {NavBar} from "./components/NavBar/NavBar";
 import {Route} from "react-router-dom";
 import {Settings} from "./components/Settings/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {store} from "./redux/store-redux";
-import {UserContainerConnect} from "./components/Users/UsersContainer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import {RootStateType, store} from "./redux/store-redux";
+import UserContainerConnect from "./components/Users/UsersContainer";
 import {ConnectHeader} from "./components/Header/HeaderContainer";
 import {Login} from "./components/Login/Login";
 import ProfileContainer from './components/Profile/ProfileContainer';
+import { useDispatch, useSelector } from 'react-redux';
+import {authThunkCreator} from "./redux/auth-reducer";
 
 const App = () => {
+
+    const isAuth = useSelector<RootStateType, boolean>(state => state.auth.isAuth)
+
+    console.log('isAuthTEST', isAuth)
+
+    const dispatch = useDispatch()
+    useEffect( () => {
+        dispatch(authThunkCreator())
+    },[] )
+
     return (
         <div className='app-wrapper'>
             <ConnectHeader/>

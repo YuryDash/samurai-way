@@ -10,6 +10,8 @@ import {
 import {Users} from "./Users";
 import React from "react";
 import {Preloader} from "../../common/preloader/Preloader";
+import { compose } from "redux";
+import { withAuthRedirect } from "../HOC/withAuthRedirect";
 
 type PropsType = {
     users: UserType[]
@@ -25,7 +27,7 @@ type PropsType = {
 }
 
 
-export class UsersContainer extends React.Component <PropsType, UserType[]> {
+class UsersContainer extends React.Component <PropsType, UserType[]> {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
@@ -64,9 +66,20 @@ const mapStateToProps = (state: RootStateType) => {
     }
 }
 // connect создает колбэк followUser которая вызывает ActionCreator
-export let UserContainerConnect = connect(mapStateToProps, {
+let UserContainerConnect = connect(mapStateToProps, {
     followThunkCreator: followThunkCreator,
     unFollowThunkCreator: unFollowThunkCreator,
     setCurrentPage: setCurrentPageAC,
     getUsers: getUsersThunkCreator
 })(UsersContainer)
+export default compose<React.FC>(
+    withAuthRedirect,
+    connect(mapStateToProps, {
+        followThunkCreator: followThunkCreator,
+        unFollowThunkCreator: unFollowThunkCreator,
+        setCurrentPage: setCurrentPageAC,
+        getUsers: getUsersThunkCreator
+    })
+)(UsersContainer)
+
+

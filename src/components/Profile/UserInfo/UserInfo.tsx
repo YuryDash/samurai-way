@@ -1,6 +1,7 @@
 import s from "../Profile.module.css";
 import React from "react";
 import {ProfileUsersType} from "../../../redux/profile-reducer";
+import { UserStatus } from "./UserStatus";
 
 type PropsInfoType = {
     profileInfo: ProfileUsersType | null
@@ -28,6 +29,7 @@ export function UserInfo(props: PropsInfoType) {
             <div className={s.description}>
                 <h3>
                     name: {props.profileInfo?.fullName}
+                    <UserStatus status={'Gon'}  />
                 </h3>
                 <div>
                     {/*<div>Date of birth: <span> 12.06</span></div>*/}

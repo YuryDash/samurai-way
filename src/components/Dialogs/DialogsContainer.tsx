@@ -1,7 +1,7 @@
 import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
 import {DialogPropsType, Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {RootStateType} from "../../redux/store-redux";
 import { withAuthRedirect } from "../HOC/withAuthRedirect";
 
@@ -27,9 +27,12 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
         }
     }
 }
-// type TypeForThisFuckinCode = AuthPropsType & DialogPropsType
 
+export default compose<React.ComponentType>(
+    withAuthRedirect,
+    connect(mapStateToProps, mapDispatchToProps),
+)(Dialogs)
 // let AuthRedirectComponent = withAuthRedirect(Dialogs<TypeForThisFuckinCode>);
 // Первые скобки вызов коннект , а вторые вызов функции которую возвращает connect
-const DialogWithAuthRedirect = withAuthRedirect(Dialogs)
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(DialogWithAuthRedirect);
+// const DialogWithAuthRedirect = withAuthRedirect(Dialogs)
+// export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(DialogWithAuthRedirect);

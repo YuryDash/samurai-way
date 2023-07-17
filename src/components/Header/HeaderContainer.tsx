@@ -12,9 +12,9 @@ type PropsType = {
 
 export class HeaderContainer extends React.Component<PropsType, AuthDataType> {
 
-    componentDidMount() {
-        this.props.login()
-    }
+    // componentDidMount() {
+    //     this.props.login()
+    // }
     render() {
         return (
             <Header authUserData={this.props.authUserData}/>

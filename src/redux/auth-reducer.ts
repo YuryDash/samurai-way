@@ -33,15 +33,26 @@ export const setAuthUserDataAC = (id: string, login: string, email: string) => {
     } as const
 }
 
-export const authThunkCreator = () => (dispatch: Dispatch) => {
+export const authThunkCreator = () => async (dispatch: Dispatch) => {
 
-        authAPI.userAuth()
-            .then((response) => {
-                if (response.data.resultCode === 0) {
-                    let {id, login, email} = response.data.data
-                    dispatch(setAuthUserDataAC(id, login, email))
-                }
-            })
+    try {
+        const res = await authAPI.userAuth()
+        if (res.data.resultCode === 0) {
+            let {id, login, email} = res.data.data
+            dispatch(setAuthUserDataAC(id, login, email))
+        }
+    } catch (e) {
+
+    }
+
+
+        // authAPI.userAuth()
+        //     .then((response) => {
+        //         if (response.data.resultCode === 0) {
+        //             let {id, login, email} = response.data.data
+        //             dispatch(setAuthUserDataAC(id, login, email))
+        //         }
+        //     })
 }
 
 

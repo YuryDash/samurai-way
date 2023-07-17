@@ -9,7 +9,6 @@ type PropsType = {
 }
 
 export function Profile(props: PropsType) {
-debugger
     return (
         <div className={s.my__data}>
             <UserInfo profileInfo={props.profileState}/>
