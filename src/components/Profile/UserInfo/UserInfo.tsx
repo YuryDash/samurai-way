@@ -4,7 +4,9 @@ import {ProfileUsersType} from "../../../redux/profile-reducer";
 import { UserStatus } from "./UserStatus";
 
 type PropsInfoType = {
-    profileInfo: ProfileUsersType | null
+    profileState: ProfileUsersType | null
+    status: string
+    getUserUpdateStatus: ( status: string ) => void
 }
 
 
@@ -15,21 +17,21 @@ export function UserInfo(props: PropsInfoType) {
         <div className={s.info}>
             <div className={s.avatar}>
                 {
-                   !props.profileInfo?.photos?.small ? <img
+                   !props.profileState?.photos?.small ? <img
                     src={imageUrl}
                     //src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/escanor-of-pride-nanatsu-no-taizai-kitaru-normin.jpg"
                     alt="123123"/>
                     : <img
                     // src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/escanor-of-pride-nanatsu-no-taizai-kitaru-normin.jpg"
-                    src={props.profileInfo?.photos?.small ?? ''}
+                    src={props.profileState?.photos?.small ?? ''}
                     alt=""/>
                 }
             </div>
 
             <div className={s.description}>
                 <h3>
-                    name: {props.profileInfo?.fullName}
-                    <UserStatus status={'Gon'}  />
+                    name: {props.profileState?.fullName}
+                    <UserStatus getUserUpdateStatus={props.getUserUpdateStatus} status={props.status}  />
                 </h3>
                 <div>
                     {/*<div>Date of birth: <span> 12.06</span></div>*/}
@@ -37,11 +39,11 @@ export function UserInfo(props: PropsInfoType) {
                     {/*<div>Education: <span> Auto Mechanical College</span></div>*/}
                     {/*<div>Web-site: <a href="src/components/Profile/Profile#">https://img2.joyreactor.cc</a></div>*/}
                     <h3>Contacts</h3>
-                    <div>Instagram: <span>{props.profileInfo?.contacts?.instagram || 'not entered'} </span></div>
-                    <div>GitHub: <span>{props.profileInfo?.contacts?.github || 'not entered' }</span></div>
-                    <div>Facebook: <span>{props.profileInfo?.contacts?.facebook || 'not entered'}</span></div>
-                    <div> VK: <span>{props.profileInfo?.contacts?.vk || 'not entered'}</span></div>
-                    <div>Twitter: <span>{props.profileInfo?.contacts?.twitter || 'not entered'}</span></div>
+                    <div>Instagram: <span>{props.profileState?.contacts?.instagram || 'not entered'} </span></div>
+                    <div>GitHub: <span>{props.profileState?.contacts?.github || 'not entered' }</span></div>
+                    <div>Facebook: <span>{props.profileState?.contacts?.facebook || 'not entered'}</span></div>
+                    <div> VK: <span>{props.profileState?.contacts?.vk || 'not entered'}</span></div>
+                    <div>Twitter: <span>{props.profileState?.contacts?.twitter || 'not entered'}</span></div>
                 </div>
             </div>
         </div>

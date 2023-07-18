@@ -36,7 +36,7 @@ export const setAuthUserDataAC = (id: string, login: string, email: string) => {
 export const authThunkCreator = () => async (dispatch: Dispatch) => {
 
     try {
-        const res = await authAPI.userAuth()
+        const res = await authAPI.me()
         if (res.data.resultCode === 0) {
             let {id, login, email} = res.data.data
             dispatch(setAuthUserDataAC(id, login, email))

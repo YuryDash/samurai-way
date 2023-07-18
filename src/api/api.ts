@@ -18,14 +18,27 @@ export const usersAPI = {
         return instance.post(`follow/${userID}`).then(response => response)
     },
     getProfile(userID: number) {
-        return instance.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userID)
+        console.log('This is obsolete method. Please use profileAPI object.')
+        return instance.get(`profile/` + userID)
     }
 
 }
 
 export const authAPI = {
-    userAuth() {
+    me() {
         return instance.get(`auth/me`)
+    }
+}
+
+export  const profileAPI = {
+    getProfile(userID: number) {
+        return instance.get(`profile/${userID}`)
+    },
+    getStatus(userID: number) {
+        return instance.get(`profile/status/${userID}` )
+    },
+    updateStatus(statusValue: string) {
+        return instance.put(`profile/status/`, {status: statusValue})
     }
 }
 

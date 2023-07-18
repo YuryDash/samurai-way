@@ -18,7 +18,6 @@ const App = () => {
 
     const isAuth = useSelector<RootStateType, boolean>(state => state.auth.isAuth)
 
-    console.log('isAuthTEST', isAuth)
 
     const dispatch = useDispatch()
     useEffect( () => {
