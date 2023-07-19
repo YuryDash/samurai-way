@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./NavBar.module.css"
 import {NavLink} from "react-router-dom";
-import {DialogsType} from "../../redux/store";
+import { DialogsType } from "../../redux/dialogs-reducer";
 //задал переменую класса актив
 let active = s.active;
 

@@ -1,17 +1,20 @@
 import React from "react";
 import s from "./Buttons.module.css"
 
+export type SubmitType = "reset" | "button" | "submit"
+
 export type PropsButtons = {
     name: string
-    callBack: ()=> void
+    callBack?: ()=> void
     className?: string
+    submit?: SubmitType
 }
 
 
 export const Buttons = (props: PropsButtons) => {
 
     return(
-        <button className={s.button} onClick={props.callBack}>{props.name}</button>
+        <button type={props.submit} className={s.button} onClick={props.callBack}>{props.name}</button>
     )
 }
 

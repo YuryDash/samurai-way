@@ -4,11 +4,10 @@ import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 
 type AddPostAT = ReturnType<typeof addPostAC>
-type UpdateNewPostAT = ReturnType<typeof updatePostAC>
 type setUserProfileAT = ReturnType<typeof setUserProfileAC>
 type setStatusAT = ReturnType<typeof setStatusAC>
 
-type ActionType = AddPostAT | UpdateNewPostAT | setUserProfileAT | setStatusAT
+type ActionType = AddPostAT  | setUserProfileAT | setStatusAT
 
 export type ProfileUsersType = {
     "aboutMe": string
@@ -34,14 +33,12 @@ export type ProfileUsersType = {
 
 export type PostsDataType = {
     posts: PostsType[]
-    newPostsText: string
     profile: ProfileUsersType
     status: string
 }
 
 const initialState: PostsDataType = {
     posts: [{id: v1(), text: 'Starts'}],
-    newPostsText: "",
     profile: {} as ProfileUsersType,
     status: ''
 }
@@ -53,10 +50,7 @@ export const profileReducer = (state = initialState, action: ActionType): PostsD
 
         case "ADD_POST":
             let newPost: PostsType = {id: v1(), text: action.payload.text};
-            return {...state, posts: [...state.posts, newPost], newPostsText: ''}
-
-        case "UPDATE_NEW_POST_TEXT":
-            return {...state, newPostsText: action.payload.text}
+            return {...state, posts: [...state.posts, newPost]}
 
         case "SET_USER_PROFILE":
             return {...state, profile: action.payload.profile}
@@ -82,15 +76,6 @@ export const setUserProfileAC = (profile: ProfileUsersType) => {
         type: "SET_USER_PROFILE",
         payload: {
             profile
-        }
-    } as const
-}
-
-export const updatePostAC = (text: string) => {
-    return {
-        type: "UPDATE_NEW_POST_TEXT",
-        payload: {
-            text
         }
     } as const
 }

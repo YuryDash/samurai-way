@@ -29,9 +29,11 @@ export const LoginForm: React.FC<InjectedFormProps<PropsType>> = (props) => {
     </form>
   )
 }
+
 const LoginReduxForm = reduxForm<PropsType>({
   form: "logins",
 })(LoginForm)
+
 
 export const Login = () => {
   const onSubmit = (formData: PropsType) => {

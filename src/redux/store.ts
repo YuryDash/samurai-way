@@ -1,16 +1,5 @@
-export type DialogsType = {
-    id: string
-    name: string
-}
-export type MessagesDataType = {
-    id: string
-    message: string
-}
-export type DialogsDataType = {
-    dialogs: DialogsType[]
-    messagesData: MessagesDataType[]
-    newMessageBody: string
-}
+import { DialogsDataType } from "./dialogs-reducer"
+
 export type PostsType = {
     id: string
     text: string
