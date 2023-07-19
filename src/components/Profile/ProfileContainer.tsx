@@ -36,7 +36,6 @@ type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & OwnPropsT
         this.props.getUserStatus(+userID)
     }
 
-
     render() {
 
     // if(!this.props.isAuth) return <Redirect to={'/login'}/>

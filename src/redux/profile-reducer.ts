@@ -36,7 +36,7 @@ export type PostsDataType = {
     posts: PostsType[]
     newPostsText: string
     profile: ProfileUsersType
-    status:string
+    status: string
 }
 
 const initialState: PostsDataType = {
@@ -97,11 +97,11 @@ export const updatePostAC = (text: string) => {
 
 export const setStatusAC = (status: string) => {
     return {
-        type:"SET_STATUS",
+        type: "SET_STATUS",
         payload: {
             status
         }
-    }as const
+    } as const
 }
 
 export const getUserProfile = (userID: number) => (dispatch: Dispatch) => {
@@ -113,14 +113,13 @@ export const getUserProfile = (userID: number) => (dispatch: Dispatch) => {
 export const getUserStatus = (userID: number) => (dispatch: Dispatch) => {
     profileAPI.getStatus(userID).then((response) => {
         dispatch(setStatusAC(response.data))
-    }).catch( (e) => {
-    } )
+    }).catch((e) => {
+    })
 }
 export const getUserUpdateStatus = (status: string) => (dispatch: Dispatch) => {
     profileAPI.updateStatus(status).then((response) => {
-        if(response.data.resultCode === 0){
-            dispatch(setStatusAC( status ))
+        if (response.data.resultCode === 0) {
+            dispatch(setStatusAC(status))
         }
     })
 }
-// Исправил ошибку, связанную со статусом

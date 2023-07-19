@@ -13,7 +13,8 @@ type PropsType = {
 export function Profile(props: PropsType) {
     return (
         <div className={s.my__data}>
-            <UserInfo profileState={props.profileState} getUserUpdateStatus={props.getUserUpdateStatus} status={props.status}/>
+            <UserInfo profileState={props.profileState} getUserUpdateStatus={props.getUserUpdateStatus}
+                      status={props.status}/>
             <MyPostsContainer/>
         </div>
     )
