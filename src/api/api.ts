@@ -1,5 +1,11 @@
 import axios from "axios";
 
+type ResponseType<T = {}>= {
+    resultCode: number
+    messages: Array<string>
+    data: T
+}
+
 const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.0/`,
     withCredentials: true,
@@ -18,7 +24,6 @@ export const usersAPI = {
         return instance.post(`follow/${userID}`).then(response => response)
     },
     getProfile(userID: number) {
-        console.log('This is obsolete method. Please use profileAPI object.')
         return instance.get(`profile/` + userID)
     }
 

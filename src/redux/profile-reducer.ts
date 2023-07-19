@@ -114,18 +114,13 @@ export const getUserStatus = (userID: number) => (dispatch: Dispatch) => {
     profileAPI.getStatus(userID).then((response) => {
         dispatch(setStatusAC(response.data))
     }).catch( (e) => {
-        console.error(e + 'this is catch in getUserUpdateStatus')
     } )
 }
 export const getUserUpdateStatus = (status: string) => (dispatch: Dispatch) => {
-
     profileAPI.updateStatus(status).then((response) => {
-        console.log(response.data.resultCode + ': res data data')
-        if(response.data.data.resultCode === 0){
-            // dispatch(setStatusAC(response.data))
+        if(response.data.resultCode === 0){
+            dispatch(setStatusAC( status ))
         }
     })
-        .catch( (e) => {
-            console.error(e + 'this is catch in getUserUpdateStatus')
-        } )
 }
+// Исправил ошибку, связанную со статусом

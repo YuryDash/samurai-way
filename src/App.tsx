@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {NavBar} from "./components/NavBar/NavBar";
-import {Route} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import {Settings} from "./components/Settings/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
@@ -11,7 +11,7 @@ import UserContainerConnect from "./components/Users/UsersContainer";
 import {ConnectHeader} from "./components/Header/HeaderContainer";
 import {Login} from "./components/Login/Login";
 import ProfileContainer from './components/Profile/ProfileContainer';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {authThunkCreator} from "./redux/auth-reducer";
 
 const App = () => {
@@ -20,9 +20,9 @@ const App = () => {
 
 
     const dispatch = useDispatch()
-    useEffect( () => {
+    useEffect(() => {
         dispatch(authThunkCreator())
-    },[] )
+    }, [])
 
     return (
         <div className='app-wrapper'>
