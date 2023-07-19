@@ -6,14 +6,13 @@ import {RootStateType} from "../../../redux/store-redux";
 
 let mapStateToProps = (state: RootStateType) => {
     return {
-        newPostText: state.profilePage.newPostsText,
         posts: state.profilePage.posts
     }
 }
 
 let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        makePostsCo: (text: string) => {dispatch(addPostAC(text))}
+        makePosts: (text: string) => {dispatch(addPostAC(text))}
     }
 }
 

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import {NavBar} from "./components/NavBar/NavBar";
-import {Route, Switch} from "react-router-dom";
+import {Route} from "react-router-dom";
 import {Settings} from "./components/Settings/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
@@ -16,7 +16,7 @@ import {authThunkCreator} from "./redux/auth-reducer";
 
 const App = () => {
 
-    const isAuth = useSelector<RootStateType, boolean>(state => state.auth.isAuth)
+    // const isAuth = useSelector<RootStateType, boolean>(state => state.auth.isAuth)
 
 
     const dispatch = useDispatch()

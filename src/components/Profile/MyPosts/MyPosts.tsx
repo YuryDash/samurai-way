@@ -6,9 +6,7 @@ import {Posts} from "./Posts/Posts";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 type PropsType = {
-  newPostText: string
-  makePostsCo: (text: string) => void
-  onChangeMyPosts: (currentValue: string) => void
+  makePosts: (text: string) => void
   posts: PostsType[]
 }
 
@@ -22,7 +20,7 @@ export const MyPosts = (props: PropsType) => {
   const mapPostsData = props.posts.map((el: any) => <Posts key={el.id} message={el.text} id={el.id}/>)
 
   const sendPost = (values: DataFormType) => {
-    props.makePostsCo(values.postMessage)
+    props.makePosts(values.postMessage)
   }
   return (
     <div className={s.my__post}>

@@ -15,7 +15,7 @@ export function Profile(props: PropsType) {
         <div className={s.my__data}>
             <UserInfo profileState={props.profileState} getUserUpdateStatus={props.getUserUpdateStatus}
                       status={props.status}/>
-            <MyPostsContainer/>
+            <MyPostsContainer />
         </div>
     )
 }
