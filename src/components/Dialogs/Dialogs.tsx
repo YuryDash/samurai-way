@@ -4,6 +4,7 @@ import {DialogItem} from "./DialogsItem/DialogItem";
 import {DialogMessages} from "./DialogMessages/DialogMessages";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {DialogsType, MessagesDataType} from "../../redux/dialogs-reducer";
+import { Input } from "../../common/FormsControl/FormControl";
 
 export type DialogPropsType = {
     dialogs: DialogsType[]
@@ -40,7 +41,13 @@ export function Dialogs(props: DialogPropsType) {
 const MessageForm: React.FC<InjectedFormProps<DataFormType>> = (props) => {
     return <form onSubmit={props.handleSubmit}>
         <div>
-            <Field type={'text'} component={'textarea'} name={'newMessageBody'} placeholder={'Enter your message'}/>
+            <Field
+              type={'text'}
+              component={Input}
+              name={'newMessageBody'}
+              placeholder={'Enter your message'}
+              className={s.inputArea}
+            />
         </div>
         <div>
             <button type={'submit'}>Send</button>

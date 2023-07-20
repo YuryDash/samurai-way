@@ -11,7 +11,7 @@
 
 .dialogsItems .active {
     color: black;
-    text-shadow: 0px 0px 3px gold;
+    text-shadow: 0 0 3px gold;
     text-decoration: underline;
 }
 
@@ -21,12 +21,14 @@
     display: flex;
     align-items: center;
 }
-.dialog a{
+
+.dialog a {
     text-decoration: none;
     color: #434445;
     font-weight: bold;
 }
-.avatar{
+
+.avatar {
     width: 40px;
     height: 40px;
     background-color: #434445;
@@ -44,5 +46,20 @@
 .message {
     padding: 22px 0;
     font-weight: 400;
+
+}
+
+.inputArea {
+    padding: 10px;
+    width: 900px;
+    height: 40px;
+    resize: none;
+    border-radius: 10px;
+    border: none;
+
+    font-size: 14px;
+
+    background: linear-gradient(90deg, rgba(13, 12, 12, 1) 0%, rgba(70, 70, 70, 1) 20%, rgba(70, 70, 70, 1) 70%, rgba(199, 199, 199, 1) 100%);
+    color: white;
 
 }
