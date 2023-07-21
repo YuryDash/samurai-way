@@ -12,10 +12,10 @@
     padding: 0 50px;
 
     color: gold;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 700;
     letter-spacing: 10px;
-    font-family: 'Cinzel', serif;
+    font-family: 'Candara', serif;
 }
 .header img {
     max-width: 56px;
@@ -30,4 +30,7 @@ header a{
     color: #464646;
     text-decoration: none;
     text-shadow: 1px 1px 10px  yellow;
+}
+.block_logout {
+    display: flex;
 }

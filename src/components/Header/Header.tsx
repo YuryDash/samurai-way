@@ -5,22 +5,28 @@ import {NavLink} from "react-router-dom";
 import {AuthDataType} from "../../redux/auth-reducer";
 
 type HeaderPropsType = {
-    authUserData: AuthDataType
+  authUserData: AuthDataType
+  logout: () => void
 }
 
 export const Header = (props: HeaderPropsType) => {
-    return (
-        <>
-            <header className={s.header}>
-                <img src={avatar} alt="just logo"/>
-                <div className={s.login}>
-                    {
-                        props.authUserData.isAuth
-                            ? <div>Hello: {props.authUserData.login}</div>
-                            : <NavLink to={'/login'}>Login</NavLink>
-                    }
+  return (
+    <>
+      <header className={s.header}>
+        <img src={avatar} alt="just logo"/>
+        <div className={s.login}>
+          {
+            props.authUserData.isAuth
+              ? (
+                <div className={s.block_logout}>
+                  <div>Hello: {props.authUserData.login}</div>
+                  <button onClick={props.logout}>Logout</button>
                 </div>
-            </header>
-        </>
-    );
+              )
+              : <NavLink to={'/login'}>Login</NavLink>
+          }
+        </div>
+      </header>
+    </>
+  );
 }
