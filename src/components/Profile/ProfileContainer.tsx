@@ -15,6 +15,7 @@ type MapStateToPropsType = {
     profileState:  ProfileUsersType | null
     isAuth: boolean
     status: string
+    userId: string
 }
 type MapDispatchToProps = {
     getUserProfile: (userID: number) => void
@@ -30,7 +31,7 @@ type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & OwnPropsT
 
         let userID = this.props.match.params.userID
         if(!userID && this.props.profileState){
-            userID = '28543'
+            userID = this.props.userId
         }
         this.props.getUserProfile(+userID)
         this.props.getUserStatus(+userID)
@@ -55,7 +56,9 @@ type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & OwnPropsT
 const mapStateToProps = (state: RootStateType) => {
     return {
         profileState: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        userId: state.auth.id,
+        isAuth: state.auth.isAuth
     }
 }
 // export default withAuthRedirect(connect(mapStateToProps, {getUserProfile})(WithUrlDataContainer))

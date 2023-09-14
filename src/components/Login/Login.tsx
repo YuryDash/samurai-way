@@ -1,11 +1,13 @@
-import React, { ChangeEvent } from 'react';
-import {connect, useSelector} from 'react-redux';
-import {Redirect} from 'react-router-dom';
-import {Field, InjectedFormProps, reduxForm} from 'redux-form';
-import {loginTC} from '../../redux/auth-reducer';
-import {RootStateType} from '../../redux/store-redux';
+import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { Field, InjectedFormProps, reduxForm } from 'redux-form';
+import { Input } from '../../common/FormsControl/FormControl';
+import { loginTC } from '../../redux/auth-reducer';
+import { RootStateType } from '../../redux/store-redux';
+import { fieldRequired, maxLength30 } from '../../utils/validators/validators';
 import { Buttons } from '../Profile/MyPosts/Posts/Buttons/Buttons';
-import s from "./login.module.css"
+import s from "./login.module.css";
 
 type FormDataType = {
   login: string
@@ -22,20 +24,44 @@ type MapStateToPropsType = {
 }
 type OwnPropsType = MapStateToPropsType & DispatchToPropsType
 
- const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+
+  console.log(props)
   return (
     <form className={s.form} onSubmit={props.handleSubmit}>
       <div>
-        <Field className={s.inputAreas} name={'login'} type="text" placeholder={'Login'} component={'input'}/>
+        <Field
+          validate={[maxLength30,fieldRequired]}
+          className={s.inputAreas}
+          name={'login'}
+          type="email"
+          placeholder={'Login'}
+          component={Input}
+        />
       </div>
       <div>
-        <Field className={`${s.inputAreas} ${s.padding}`} name={'password'} type="password" placeholder={'Password'} component={'input'}/>
+        <Field
+          className={`${s.inputAreas} ${s.padding}`}
+          name={'password'}
+          type="password"
+          placeholder={'Password'}
+          component={Input}
+          validate={[maxLength30,fieldRequired]}
+        />
       </div>
       <div>
-        <label style={{fontFamily:"Cinzel"}}><Field name={'rememberMe'} type="checkbox" component={'input'}/> Remember Me</label>
+        <label style={{fontFamily: "Cinzel"}}>
+          <Field
+            name={'rememberMe'}
+            type="checkbox"
+            component={Input}
+          /> Remember Me
+        </label>
       </div>
+      {props.error && <div className={s.formSummaryError}>
+        {props.error}
+      </div>}
       <div>
-        {/*<button type={'submit'}>Login</button>*/}
         <Buttons submit={'submit'} name={'Login'}/>
       </div>
     </form>
@@ -47,11 +73,10 @@ const LoginReduxForm = reduxForm<FormDataType>({
 
 const Login = (props: OwnPropsType) => {
   const onSubmit = (formData: FormDataType) => {
-    props.loginTC( formData.login, formData.password, formData.rememberMe )
+    props.loginTC(formData.login, formData.password, formData.rememberMe)
   }
-
-  if (props.isAuth){
-    return <Redirect to={"/profile"} />
+  if (props.isAuth) {
+    return <Redirect to={"/profile"}/>
   }
   return (
     <div>

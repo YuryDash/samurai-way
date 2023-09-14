@@ -2,7 +2,7 @@ import React from "react";
 import {Header} from "./Header";
 import {connect} from "react-redux";
 import {RootStateType} from "../../redux/store-redux";
-import {AuthDataType, authThunkCreator, logOutTC, setAuthUserDataAC} from "../../redux/auth-reducer";
+import {AuthDataType, authThunkCreator, logoutTC, setAuthUserDataAC} from "../../redux/auth-reducer";
 
 type PropsType = {
   setAuthUserDataAC: (dataLoading: AuthDataType) => void
@@ -30,5 +30,5 @@ export const ConnectHeader = connect(
   {
     setAuthUserDataAC,
     login: authThunkCreator,
-    logout: logOutTC,
+    logout: logoutTC,
   })(HeaderContainer)

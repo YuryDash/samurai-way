@@ -14,7 +14,7 @@ interface FormControlProps {
   return (
     <div className={s.formControl + ' ' + (hasError ? s.error : '')}>
       <div>{children}</div>
-      {hasError && <span className={s.error_span}>{meta.error}</span>}
+      {hasError && <span>{meta.error}</span>}
     </div>
   );
 };
@@ -28,7 +28,7 @@ interface TextareaProps {
     touched: boolean;
     error: string;
   };
-}
+};
 
 export const Textarea = ({ input, meta, ...props }: TextareaProps) => {
   return (
@@ -47,7 +47,7 @@ interface InputProps {
     touched: boolean;
     error: string;
   };
-}
+};
 
 export const Input = ({ input, meta, ...props }: InputProps) => {
   return (

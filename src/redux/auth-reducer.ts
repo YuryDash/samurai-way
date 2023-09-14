@@ -2,6 +2,7 @@ import {authAPI} from "../api/api";
 import {AnyAction, Dispatch} from "redux";
 import {RootStateType} from "./store-redux";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {stopSubmit} from "redux-form";
 
 export type setAuthUserDataAT = ReturnType<typeof setAuthUserDataAC>
 export type UsersActionType = setAuthUserDataAT
@@ -46,7 +47,6 @@ export const authThunkCreator = () => async (dispatch: Dispatch) => {
     }
   } catch (e) {
     console.log('error', e)
-
   }
 }
 
@@ -54,19 +54,19 @@ export const loginTC = (
   email: string, password: string, rememberMe: boolean
 ) => async (dispatch: ThunkDispatch<RootStateType, unknown, AnyAction>) => {
   try {
-    debugger
     const res = await authAPI.login(email, password, rememberMe)
     if (res.data.resultCode === 0) {
       dispatch(authThunkCreator())
     } else {
-      console.log('loginTC else')
+      let message = res.data.messages.length > 0 ? res.data.messages[0] : "Some Error";
+      dispatch(stopSubmit("logins", {_error: message}))
     }
   } catch (e) {
     console.log('error', e)
   }
 }
 
-export const logOutTC = () => async (dispatch: ThunkDispatch<RootStateType, unknown, AnyAction>) => {
+export const logoutTC = () => async (dispatch: ThunkDispatch<RootStateType, unknown, AnyAction>) => {
   try {
     const res = await authAPI.logout()
     if (res.data.resultCode === 0) {
